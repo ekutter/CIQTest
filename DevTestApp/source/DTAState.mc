@@ -2,14 +2,18 @@ using Toybox.Application as App;
 using Toybox.WatchUi as Ui;
 using Toybox.System as Sys;
 using Toybox.Lang as Lang;
+using Toybox.Attention as Att;
+using Toybox.Timer;
 
 
 //---------------------------------------------------------
 //---------------------------------------------------------
 class State
 {
-    enum {PgHome, PgInput, PgInputBehavior, PgFont, PgColors, PgAccel, PgCount}
+    enum {PgHome, PgInput, PgInputBehavior, PgFont, PgColors, PgTones, PgAccel, PgCount}
     var pgCur = PgHome;
+    var pgtimer = new Timer.Timer();  //this gets reused by multiple pages so we don't run out of timers
+    
     
     //---------------------------------
     function initialize()
@@ -62,6 +66,12 @@ class State
             return;
         }
         case PgColors: return(Ui.switchToView(new PgColorsView(), new PgColorsDelegate(), Ui.SLIDE_IMMEDIATE));
+        case PgTones: 
+        {
+            var view=new PgTonesView();
+            Ui.switchToView(view, new PgTonesDelegate(view), Ui.SLIDE_IMMEDIATE);
+            return;
+        }
         case PgAccel: 
         {
             var view=new PgAccelView();
@@ -69,6 +79,7 @@ class State
             return;
         }
         default:
+            return;
         }
     }
 
@@ -82,8 +93,10 @@ class State
         case PgInputBehavior:
         case PgFont: 
         case PgColors: 
-        case PgAccel:
+        case PgAccel: //probably should test for sensor availability
             return(true); //always
+        case PgTones:
+            return(Att has :playTone);
         default:
             return(false);
         }

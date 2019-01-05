@@ -2,6 +2,7 @@ using Toybox.WatchUi as Ui;
 using Toybox.Graphics as Gfx;
 using Toybox.System as Sys;
 using Toybox.Sensor;
+using Toybox.Attention as Att;
 
 
 //---------------------------------------------------------
@@ -38,7 +39,6 @@ class PgAccelView extends Ui.View
     enum {SerX, SerY, SerZ, SerCount}
     enum {GraphAccel, GraphMag, GraphCount}
     
-    var timer = new Ui.Timer.Timer();
     var rggraph;
     var iGraphCur = GraphAccel;
     var iScale = 2000;
@@ -81,7 +81,7 @@ class PgAccelView extends Ui.View
     //---------------------------------
     function onShow()
     {    
-        timer.start(method(:onTimerTic),100,true);
+        state.pgtimer.start(method(:onTimerTic),100,true);
     }
     
     //---------------------------------
@@ -113,6 +113,7 @@ class PgAccelView extends Ui.View
     //---------------------------------
     function onHide()
     {
+        state.pgtimer.stop();
     }
     
     //---------------------------------

@@ -29,7 +29,7 @@ class ToneMakerDelegate extends WatchUi.BehaviorDelegate {
 
 	function tone(iTone)
 	{                                    
-	    //if ((iTone != -1) && (Att has :playTone))
+	    if ((iTone != -1) && (Att has :playTone))
 	        {Att.playTone(iTone % 18);}
 	}
 

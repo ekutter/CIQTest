@@ -26,7 +26,6 @@ class ToneMakerView extends WatchUi.View {
         dc.setColor( Graphics.COLOR_WHITE,Graphics.COLOR_BLACK);
         dc.clear();
         dc.drawText(dc.getWidth()/2, dc.getHeight()/2,8,iTone,Graphics.TEXT_JUSTIFY_VCENTER | Graphics.TEXT_JUSTIFY_CENTER);
-        dc.drawText(dc.getWidth()/2, dc.getHeight()/2+Graphics.getFontHeight(4),4,Toybox.Attention has :playTone,Graphics.TEXT_JUSTIFY_VCENTER | Graphics.TEXT_JUSTIFY_CENTER);
     }
 
     // Called when this View is removed from the screen. Save the
