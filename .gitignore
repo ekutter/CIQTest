@@ -1,0 +1,6 @@
+.DS_Store
+bin/
+bin/*
+deleted/*
+deleted
+*.prg
