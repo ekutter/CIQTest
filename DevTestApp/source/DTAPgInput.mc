@@ -95,12 +95,15 @@ class PgInputDelegate extends Ui.InputDelegate
         switch (swipe)
         {
         case Ui.SWIPE_LEFT:
-            return(state.setPg(1));
+            state.setPg(1);
+            break;
         case Ui.SWIPE_RIGHT:
-            return(state.setPg(-1));
+            state.setPg(-1);
+            return(true);
         default:
             view.addEvent(["onSwipe", strSwipe(swipeevt.getDirection())]);
         }
+        return(false);
     }   
 }
 //---------------------------------------------------------
@@ -184,6 +187,7 @@ class PgInputBehaviorDelegate extends Ui.BehaviorDelegate
 	        view.clearEvent();
 	        view.addEvent(["onSwipe", strSwipe(d)]);
         }
+        return(false);
     }     
     
     //---------------------------------
