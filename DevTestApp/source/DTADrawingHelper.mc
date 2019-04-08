@@ -74,6 +74,14 @@ function initDrawingHelper()
         addFont(Ui.loadResource(Rez.Fonts.id_font_BigNumThin),"FX1"); //FX1
         addFont(Ui.loadResource(Rez.Fonts.id_font_BigNumThick),"FX2"); //FX2
     //}
+    
+    //Height, Ascent, Descent, CYGlyphAscent
+    var sOut = "";
+    for (var i = F0; i <= FN3; ++i)
+    {
+		sOut += Lang.format("$1$/$2$/$3$/$4$\t",[FntHeight[i], FntAscent[i], FntCYOff[i], FntAscent[i]-FntCYOff[i]]);    
+    }
+    logMsg.logMsg("fonts: " + sOut);
 }
 //-----------------------------------------------------
 function addFont(f,name)

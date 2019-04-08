@@ -218,7 +218,7 @@ class StopWatch
     //---------------------------------
     function toStr()
     {   
-        return((getTime()/1000.0).format("%.2f"));
+        return((getTime()/1000.0).format("%.3f"));
     }
 }
 

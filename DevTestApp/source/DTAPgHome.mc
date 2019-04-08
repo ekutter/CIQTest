@@ -14,6 +14,32 @@ class PgHomeDelegate extends Ui.BehaviorDelegate
 //---------------------------------------------------------
 class PgHomeView extends Ui.View
 {
+	var strBench = "";
+	function onShow()
+	{
+		Sys.println("onShow");
+		var sw = new StopWatch();
+		
+		var x = 1;
+		var acc = 124;
+		for (var i = 0; i < 3000; ++i)
+		{
+			acc *= x;
+		}
+		strBench = sw.toStr();
+		
+		sw.initialize();
+		x = 1.246;
+		acc = 124;
+		for (var i = 0; i < 3000; ++i)
+		{
+			acc *= x;
+		}
+		
+		strBench += ", " + sw.toStr();
+		
+		
+	}
     //---------------------------------
     function onUpdate(dc)
     {
@@ -26,7 +52,9 @@ class PgHomeView extends Ui.View
 
         var y = 4;
         fillRect(dc,0,0,cxScreen,FntAscent[F4],ClrYellow);
-        y += drawTextY(dc,xCenter,y,F4,"Home",JC,ClrWhite);
+        y += drawTextY(dc,xCenter,y,F4,"Home2",JC,ClrWhite);
+
+        y += drawTextY(dc,xCenter,y,F2,strBench,JC,ClrWhite);
 
         s = Lang.format("p#: $1$", [settings.partNumber]); 
         y += drawTextY(dc,xCenter,y,F2,s,JC,ClrWhite);
@@ -41,7 +69,7 @@ class PgHomeView extends Ui.View
         y += drawTextY(dc,xCenter,y,F2,s,JC,ClrWhite);        
 
         var temp = "";
-        if (Toybox has :SensorHistory)
+        if ((Toybox has :SensorHistory) && (Toybox.SensorHistory has :getTemperatureHistory))
         {        
           var tempIter = Toybox.SensorHistory.getTemperatureHistory({:period => 1});
           temp = tempIter.next().data.format("%0.0f");
