@@ -77,7 +77,9 @@ class PgFontView extends Ui.View
         {
 	        for (var f = F0; f <= FN3; ++f)
 	        {
-	            y+=drawTextY(dc,xCenter,y,f,f+"R0-'$8°.",JC,ClrWhite); //"B0123456789"+"°" 
+	            var str = f + " " + (isNumFont(f) ? "02468" : "aX2+g°");
+	        
+	            y+=drawTextY(dc,xCenter,y,f,str,JC,ClrWhite); //"B0123456789"+"°" 
 	        }
 	        drawTextY(dc,xCenter,y,FX1,"12X",JC,ClrGreen);
 	        drawTextY(dc,xCenter,y,FX2,"X34",JC,ClrYellow);
@@ -93,7 +95,7 @@ class PgFontView extends Ui.View
         }
         else
         {
-            var str = "aX2+g"+"°";
+            var str = isNumFont(iFont) ? "1234567890" : "aX2+g°";
             var dim = dc.getTextDimensions(str,iFont);
             var width = dc.getTextWidthInPixels(str,iFont);
             if (width != dim[0]){Sys.println("width's don't match: " + width + ", " + dim);}

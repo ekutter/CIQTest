@@ -98,6 +98,9 @@ function addFont(f,name)
       [i,FntHeight[i], FntAscent[i], FntCYOff[i]]));
 }
 
+//---------------------------------
+function isNumFont(iFnt){return((iFnt >= FN0) && (iFnt <= FX2));}
+
 //---------------------------------------------------------
 //---------------------------------------------------------
 class Rect

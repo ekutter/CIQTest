@@ -41,8 +41,19 @@ class PgHomeView extends Ui.View
 		
 	}
     //---------------------------------
+    var fFirstTime = true;
     function onUpdate(dc)
     {
+    	if (fFirstTime)
+    	{
+    		fFirstTime = false;
+    		Sys.println("Font getSize('1234567890')");
+    		for (var i = F0; i <= FN3; ++i)
+    		{
+    			Sys.println(i + " - " + dc.getTextDimensions("1234567890",i));
+    		}
+    	}
+    
         dc.setColor(ClrBlack,ClrBlack);
         dc.clear();
 
