@@ -54,7 +54,7 @@ class PgHomeView extends Ui.View
     		}
     	}
     
-        dc.setColor(ClrBlack,ClrBlack);
+        dc.setColor(ClrBG,ClrBG);
         dc.clear();
 
         var settings = Sys.getDeviceSettings();
@@ -63,21 +63,21 @@ class PgHomeView extends Ui.View
 
         var y = 4;
         fillRect(dc,0,0,cxScreen,FntAscent[F4],ClrYellow);
-        y += drawTextY(dc,xCenter,y,F4,"Home2",JC,ClrWhite);
+        y += drawTextY(dc,xCenter,y,F4,"Home2",JC,ClrFG);
 
-        y += drawTextY(dc,xCenter,y,F2,strBench,JC,ClrWhite);
+        y += drawTextY(dc,xCenter,y,F2,strBench,JC,ClrFG);
 
         s = Lang.format("p#: $1$", [settings.partNumber]); 
-        y += drawTextY(dc,xCenter,y,F2,s,JC,ClrWhite);
+        y += drawTextY(dc,xCenter,y,F2,s,JC,ClrFG);
 
         s = Lang.format("id: $1$", [settings.uniqueIdentifier.substring(0,16)]); 
-        y += drawTextY(dc,xCenter,y,F2,s,JC,ClrWhite);
+        y += drawTextY(dc,xCenter,y,F2,s,JC,ClrFG);
         
         s = Lang.format("mem: $1$k/$2$k - $3$k",
             [stats.usedMemory/1024, 
              stats.totalMemory/1024,
              stats.freeMemory/1024]);
-        y += drawTextY(dc,xCenter,y,F2,s,JC,ClrWhite);        
+        y += drawTextY(dc,xCenter,y,F2,s,JC,ClrFG);        
 
         var temp = "";
         if ((Toybox has :SensorHistory) && (Toybox.SensorHistory has :getTemperatureHistory))
@@ -87,7 +87,7 @@ class PgHomeView extends Ui.View
         }
 
         s = "bat: " + stats.battery.format("%0.0f");
-        y += drawTextY(dc,xCenter,y,F2,s,JC,ClrWhite);
+        y += drawTextY(dc,xCenter,y,F2,s,JC,ClrFG);
         
         // settings.connectionAvailable, connectionInfo, phoneConnected
         // screenshape
@@ -96,13 +96,13 @@ class PgHomeView extends Ui.View
         s = Lang.format("fw: $1$.$2$ mnkyV: $3$.$4$.$5$", 
             [settings.firmwareVersion[0],settings.firmwareVersion[1],
              ver[0],ver[1],ver[2]]); 
-        y += drawTextY(dc,xCenter,y,F2,s,JC,ClrWhite);        
+        y += drawTextY(dc,xCenter,y,F2,s,JC,ClrFG);        
 
         s = Lang.format("touch: $1$ btns: $2$", [settings.isTouchScreen ? "Y" : "N",settings.inputButtons]); 
-        y += drawTextY(dc,xCenter,y,F2,s,JC,ClrWhite);
+        y += drawTextY(dc,xCenter,y,F2,s,JC,ClrFG);
         
-        y += drawTextY(dc,xCenter,y,F2,Lang.format("dc: $1$,$2$",[dc.getWidth(), dc.getHeight()]),JC,ClrWhite);
+        y += drawTextY(dc,xCenter,y,F2,Lang.format("dc: $1$,$2$",[dc.getWidth(), dc.getHeight()]),JC,ClrFG);
         if ((cxScreen != dc.getWidth()) || (cyScreen != dc.getHeight()))        
-            {y += drawTextY(dc,xCenter,y,F2,Lang.format("scr: $1$,$2$",[cxScreen,cyScreen]),JC,ClrWhite);}
+            {y += drawTextY(dc,xCenter,y,F2,Lang.format("scr: $1$,$2$",[cxScreen,cyScreen]),JC,ClrFG);}
     }
 }

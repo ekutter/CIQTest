@@ -80,8 +80,8 @@ class Graph
     function drawGraph(dc, rc)
     {
         dc.setPenWidth(2);
-        rc.draw(dc,ClrDkGray);
-        drawLine(dc,rc.x0,rc.yCenter(),rc.x1,rc.yCenter(),ClrDkGray);
+        rc.draw(dc,ClrLtGray);
+        drawLine(dc,rc.x0,rc.yCenter(),rc.x1,rc.yCenter(),ClrLtGray);
         dc.setPenWidth(1);
 
         for (var i = 0; i < rgser.size(); ++i)
@@ -92,8 +92,8 @@ class Graph
 		        var yMin = ser.min;
 		        var yMax = ser.max;
 		
-		        fillRect(dc,rc.x0+18,rc.y0-1,67,2,ClrWhite);
-		        fillRect(dc,rc.x0+18,rc.y1-2,67,2,ClrWhite);
+		        //fillRect(dc,rc.x0+18,rc.y0-1,67,2,ClrFG);
+		        //fillRect(dc,rc.x0+18,rc.y1-2,67,2,ClrFG);
 		        
 		        if ((ser.cDP > 1) && (yMax != yMin))
 		        {

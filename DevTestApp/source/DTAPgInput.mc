@@ -218,7 +218,7 @@ class PgInputView extends Ui.View
     //---------------------------------
     function onUpdate(dc)
     {
-	    dc.setColor(ClrBlack,ClrBlack);
+	    dc.setColor(ClrBG,ClrBG);
 	    dc.clear();
 	
 	    var y = 4;
@@ -233,7 +233,7 @@ class PgInputView extends Ui.View
 	        var fnt = F4;
 	        for (var j = 0; j < rgstr.size(); ++j)
 	        { 
-                y += drawTextY(dc,xCenter,y,fnt,rgstr[j],JC,ClrWhite);
+                y += drawTextY(dc,xCenter,y,fnt,rgstr[j],JC,ClrFG);
                 fnt = F3;
             }
             drawRect(dc,0,y-2,cxScreen,2,ClrRed);

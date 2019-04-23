@@ -119,13 +119,13 @@ class PgAccelView extends Ui.View
     //---------------------------------
     function onUpdate(dc)
     {
-        dc.setColor(ClrBlack,ClrBlack);
+        dc.setColor(ClrBG,ClrBG);
         dc.clear();
 
         var y = 4;
         fillRect(dc,0,0,cxScreen,FntAscent[F4],ClrYellow);
-        y += drawTextY(dc,xCenter,y,F4,"Accel",JC,ClrWhite);
-        y += drawTextY(dc, xCenter, y, F3, ((iGraphCur == GraphAccel) ? "Acc" : "Mag") + " " + iScale, JC, ClrWhite);        
+        y += drawTextY(dc,xCenter,y,F4,"Accel",JC,ClrFG);
+        y += drawTextY(dc, xCenter, y, F3, ((iGraphCur == GraphAccel) ? "Acc" : "Mag") + " " + iScale, JC, ClrFG);        
         
         var rc = new Rect(18,30,cxScreen-18, cyScreen-30);
         
@@ -145,7 +145,7 @@ class PgAccelView extends Ui.View
 	            for (var i = 0; i < SerCount; ++i)
 	            {
 	                var ser = graph.rgser[i];
-	                y += drawTextY(dc, xCenter, y, fnt,Lang.format("$1$=$2$,$3$,$4$",[["X","Y","Z"][i],data[i],ser.min,ser.max]), JC, ClrWhite);
+	                y += drawTextY(dc, xCenter, y, fnt,Lang.format("$1$=$2$,$3$,$4$",[["X","Y","Z"][i],data[i],ser.min,ser.max]), JC, ClrFG);
 	            }
 	        }
         }

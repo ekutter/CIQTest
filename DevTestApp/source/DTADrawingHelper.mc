@@ -20,6 +20,9 @@ const ClrDkGreen = 0x00AA00;//Gfx.COLOR_DK_GREEN;
 const ClrGreen = 0x00FF00;//Gfx.COLOR_GREEN;
 const ClrYellow = 0xFFAA00; //Gfx.COLOR_YELLOW;
 
+const ClrBG = ClrWhite;
+const ClrFG = ClrBlack;
+
 //extended colors
 const ClrPurple = 0xAA00FF;
 const ClrDkPurple = 0x5500AA;//0xAA00FF;

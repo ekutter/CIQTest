@@ -61,14 +61,14 @@ class PgTonesView extends Ui.View
     //---------------------------------
     function onUpdate(dc)
     {
-        dc.setColor(ClrBlack,ClrBlack);
+        dc.setColor(ClrBG,ClrBG);
         dc.clear();
 
         var y = 4;
         fillRect(dc,0,0,cxScreen,FntAscent[F4],ClrYellow);
-        y += drawTextY(dc,xCenter,y,F4,"Tones",JC,ClrWhite);
+        y += drawTextY(dc,xCenter,y,F4,"Tones",JC,ClrFG);
         
         y += FntHeight[F4];        
-        y+= drawTextY(dc,xCenter,y,FN3,iTone,JC,ClrWhite);
+        y+= drawTextY(dc,xCenter,y,FN3,iTone,JC,ClrFG);
    }
 }
