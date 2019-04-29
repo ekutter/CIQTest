@@ -1,8 +1,8 @@
 <resources>
     <fonts>
-        <font id="id_font_BigNumThin" filename="fonts/BebasNeueBook124.fnt" 
+        <font id="id_font_BigNumThin" filename="fonts/BebasNeueBook124.fnt" antialias="true" 
             filter="0123456789:Ax+g"/>
-        <font id="id_font_BigNumThick" filename="fonts/BebasNeueBold124.fnt" 
+        <font id="id_font_BigNumThick" filename="fonts/BebasNeueBold124.fnt" antialias="true" 
             filter="0123456789:Ax+g"/>
     </fonts>
 </resources>

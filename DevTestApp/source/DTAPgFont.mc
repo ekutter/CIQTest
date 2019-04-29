@@ -96,8 +96,8 @@ class PgFontView extends Ui.View
         else
         {
             var str = isNumFont(iFont) ? "1234567890" : "aX2+g°";
-            var dim = dc.getTextDimensions(str,iFont);
-            var width = dc.getTextWidthInPixels(str,iFont);
+            var dim = dc.getTextDimensions(str,Fnt[iFont]);
+            var width = dc.getTextWidthInPixels(str,Fnt[iFont]);
             if (width != dim[0]){Sys.println("width's don't match: " + width + ", " + dim);}
             
             y+= drawTextY(dc,xCenter,y,F3,iFont + " " + FntName[iFont],JC,ClrFG);
@@ -109,9 +109,9 @@ class PgFontView extends Ui.View
             y+= drawTextY(dc,xCenter,y,F2,dim.toString(),JC,ClrFG);
             
             drawTextY(dc,xCenter,y,iFont,str,JT_C,ClrFG);
-            drawRect(dc,xCenter-width/2, y,width,dim[1],ClrRed);
             drawRect(dc,xCenter-width/2, y,width,FntAscent[iFont],ClrBlue);
             drawRect(dc,xCenter-width/2, y+FntAscent[iFont],width,FntHeight[iFont]-FntAscent[iFont],ClrGreen);
+            drawRect(dc,xCenter-width/2, y,width,dim[1],ClrRed);
             
         }
     }
