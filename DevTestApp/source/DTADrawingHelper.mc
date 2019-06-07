@@ -158,6 +158,7 @@ function adjustY(y,fnt,just)
     if((just & JT) == JT) {y = y;}// - FntCYOff[fnt];}
     else if((just & JBL) == JBL) {y = y - FntAscent[fnt];}
     else if((just & JB) == JB) {y = y - FntHeight[fnt];}
+    else if((just & JVC) == JVC) {y = y;}
     else {y = y - FntCYOff[fnt];}
     return(y);
 }
