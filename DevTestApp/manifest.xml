@@ -3,6 +3,7 @@
         <iq:products>
             <iq:product id="edge1030"/>
             <iq:product id="edge520plus"/>
+            <iq:product id="edge530"/>
             <iq:product id="edge820"/>
             <iq:product id="fenix5plus"/>
             <iq:product id="fr245"/>
