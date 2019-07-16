@@ -1,0 +1,10 @@
+<strings>
+    <string id="AppName">MapSample2</string>
+    <string id="prompt">Click the menu button</string>
+    <string id="MapMenuTitle">Map Options</string>
+    <string id="MapMenuTitle2">Map Menu</string>
+    <string id="viewMap">View Map</string>
+    <string id="trackMap">Track Map</string>
+    <string id="item_0">Item 0</string>
+    <string id="item_1">Item 1</string>
+</strings>
