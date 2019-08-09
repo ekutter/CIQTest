@@ -1,8 +1,11 @@
 using Toybox.Application;
+using Toybox.System as Sys;
 
 class TestWidgetApp extends Application.AppBase {
 
     function initialize() {
+        Sys.println("TestWidgetApp");
+        Sys.println(strTimeOfDay(true));
         AppBase.initialize();
     }
     
