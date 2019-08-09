@@ -2,8 +2,11 @@
     <iq:application entry="TestWebRequestApp" id="c8a1a2e9495b49d3a5f7cd9e63f743c2" launcherIcon="@Drawables.LauncherIcon" minSdkVersion="1.4.0" name="@Strings.AppName" type="watch-app" version="1.0.0">
         <iq:products>
             <iq:product id="edge520plus"/>
+            <iq:product id="fenix5plus"/>
+            <iq:product id="fr245m"/>
             <iq:product id="fr630"/>
             <iq:product id="fr935"/>
+            <iq:product id="fr945"/>
         </iq:products>
         <iq:permissions>
             <iq:uses-permission id="Communications"/>

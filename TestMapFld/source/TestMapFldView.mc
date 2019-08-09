@@ -29,9 +29,27 @@ class TestMapFldView extends WatchUi.DataField {
     var i = 0;
     function onUpdate(dc) 
     {
-    	i += 1;
-    	dc.setColor(Gfx.COLOR_BLACK,Gfx.COLOR_TRANSPARENT);
-    	dc.drawText(dc.getWidth()/2,dc.getHeight()/2,Gfx.FONT_NUMBER_HOT,i,Gfx.TEXT_JUSTIFY_CENTER | Gfx.TEXT_JUSTIFY_VCENTER);
+        i += 1;
+        //dc.setColor(Gfx.COLOR_BLACK,Gfx.COLOR_TRANSPARENT);
+        if (true) 
+        {
+            //Fill the whole cell
+            dc.setColor(Gfx.COLOR_BLACK,Gfx.COLOR_YELLOW);
+            dc.clear();
+            dc.drawText(dc.getWidth()/2,dc.getHeight()/2,Gfx.FONT_LARGE,dc.getWidth() + "x" + dc.getHeight(),
+            Gfx.TEXT_JUSTIFY_CENTER | Gfx.TEXT_JUSTIFY_VCENTER);
+        }
+        else
+        {
+            //transparent test
+            dc.setColor(Gfx.COLOR_RED,Gfx.COLOR_BLUE);
+            dc.setPenWidth(2);
+            dc.drawRectangle(0,0,dc.getWidth(),dc.getHeight());
+            
+            dc.setColor(Gfx.COLOR_BLACK,Gfx.COLOR_YELLOW);
+            dc.drawText(dc.getWidth()/2,dc.getHeight()/2,Gfx.FONT_LARGE,i,Gfx.TEXT_JUSTIFY_CENTER);
+            dc.drawText(dc.getWidth()/2,0,Gfx.FONT_LARGE,dc.getWidth() + "x" + dc.getHeight(),Gfx.TEXT_JUSTIFY_CENTER);
+        }
     }
 
 }

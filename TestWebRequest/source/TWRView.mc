@@ -22,7 +22,7 @@ class TestWebRequestView extends Ui.View
     var cErr = 0;               //how many error responses have we had
     var cResponse;              //how many successful responses did we get
     
-    var cReqInt = 3000; 
+    var cReqInt = 300; 
     
     //---------------------------------
     function initialize() 

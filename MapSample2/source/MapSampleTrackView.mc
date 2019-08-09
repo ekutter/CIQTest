@@ -26,7 +26,7 @@ class MapSampleTrackView extends Ui.MapTrackView {
         updateView();
 
         // set the bound box for the screen area to focus the map on
-        MapView.setScreenVisibleArea(0, System.getDeviceSettings().screenHeight / 2, System.getDeviceSettings().screenWidth, System.getDeviceSettings().screenHeight);
+        MapTrackView.setScreenVisibleArea(0, System.getDeviceSettings().screenHeight / 2, System.getDeviceSettings().screenWidth, System.getDeviceSettings().screenHeight);
     }
     
     function zoomOut(){
@@ -57,15 +57,15 @@ class MapSampleTrackView extends Ui.MapTrackView {
 
         if ((posLast[0] != pos[0]) || (posLast[1] != pos[1]) || (zoomFactorLast == zoomFactor))
         {
-	        var latD = zoomY * zoomFactor;
-	        var lonD = zoomX * zoomFactor;
-	        
-	        var top_left = new Position.Location({:latitude => pos[0]+latD, :longitude =>pos[1]-lonD, :format => :radians});
-	        var bottom_right = new Position.Location({:latitude => pos[0]-latD, :longitude =>pos[1]+lonD, :format => :radians});
-	        Sys.println(Lang.format("fact=$1$, TL=$2$, BR=$3$",
-	           [zoomFactor, top_left.toDegrees(),bottom_right.toDegrees()]));
-	        MapView.setMapVisibleArea(top_left, bottom_right);
-	    }
+            var latD = zoomY * zoomFactor;
+            var lonD = zoomX * zoomFactor;
+            
+            var top_left = new Position.Location({:latitude => pos[0]+latD, :longitude =>pos[1]-lonD, :format => :radians});
+            var bottom_right = new Position.Location({:latitude => pos[0]-latD, :longitude =>pos[1]+lonD, :format => :radians});
+            Sys.println(Lang.format("fact=$1$, TL=$2$, BR=$3$",
+               [zoomFactor, top_left.toDegrees(),bottom_right.toDegrees()]));
+            MapTrackView.setMapVisibleArea(top_left, bottom_right);
+        }
     }
 
     // Load your resources here

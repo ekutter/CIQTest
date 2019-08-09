@@ -4,6 +4,8 @@
             <iq:product id="edge1030"/>
             <iq:product id="edge530"/>
             <iq:product id="fenix5plus"/>
+            <iq:product id="fenix6"/>
+            <iq:product id="fenix6pro"/>
             <iq:product id="fr945"/>
             <iq:product id="marqathlete"/>
         </iq:products>
