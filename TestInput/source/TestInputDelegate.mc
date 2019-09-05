@@ -22,10 +22,15 @@ class TestInputDelegate extends Ui.BehaviorDelegate
     function onRelease(evt){AddMsg("Release(" + strClick(evt) + ")");}
     function onSwipe(evt){AddMsg("Swipe(" + strSwipe(evt) + ")");}
     function onTap(evt){AddMsg("Tap(" + strClick(evt) + ")");}
-    function onMenu() 
-    {
-        return true;
-    }
+
+    function onBack() {AddMsg("onBack()"); return(false);}
+    function onMenu() {AddMsg("onBack()"); return(false);}
+    function onNextMode() {AddMsg("onNextMode()"); return(false);}
+    function onNextPage() {AddMsg("onNextPg()"); return(false);}
+    function onPreviousMode() {AddMsg("onPrevMode()"); return(false);}
+    function onPreviousPage() {AddMsg("onPevPg()"); return(false);}
+    function onSelect() {AddMsg("onSelect()"); return(false);}
+    
 
     //-----------------------------------------------------
     function AddMsg(str)
