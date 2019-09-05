@@ -14,45 +14,45 @@ class PgHomeDelegate extends Ui.BehaviorDelegate
 //---------------------------------------------------------
 class PgHomeView extends Ui.View
 {
-	var strBench = "";
-	function onShow()
-	{
-		Sys.println("onShow");
-		var sw = new StopWatch();
-		
-		var x = 1;
-		var acc = 124;
-		for (var i = 0; i < 3000; ++i)
-		{
-			acc *= x;
-		}
-		strBench = sw.toStr();
-		
-		sw.initialize();
-		x = 1.246;
-		acc = 124;
-		for (var i = 0; i < 3000; ++i)
-		{
-			acc *= x;
-		}
-		
-		strBench += ", " + sw.toStr();
-		
-		
-	}
+    var strBench = "";
+    function onShow()
+    {
+        Sys.println("onShow");
+        var sw = new StopWatch();
+        
+        var x = 1;
+        var acc = 124;
+        for (var i = 0; i < 3000; ++i)
+        {
+            acc *= x;
+        }
+        strBench = sw.toStr();
+        
+        sw.initialize();
+        x = 1.246;
+        acc = 124;
+        for (var i = 0; i < 3000; ++i)
+        {
+            acc *= x;
+        }
+        
+        strBench += ", " + sw.toStr();
+        
+        
+    }
     //---------------------------------
     var fFirstTime = true;
     function onUpdate(dc)
     {
-    	if (fFirstTime)
-    	{
-    		fFirstTime = false;
-    		Sys.println("Font getSize('1234567890')");
-    		for (var i = F0; i <= FN3; ++i)
-    		{
-    			Sys.println(i + " - " + dc.getTextDimensions("1234567890",i));
-    		}
-    	}
+        if (fFirstTime)
+        {
+            fFirstTime = false;
+            Sys.println("Font getSize('1234567890')");
+            for (var i = F0; i <= FN3; ++i)
+            {
+                Sys.println(i + " - " + dc.getTextDimensions("1234567890",i));
+            }
+        }
     
         dc.setColor(ClrBG,ClrBG);
         dc.clear();
@@ -86,14 +86,11 @@ class PgHomeView extends Ui.View
           temp = tempIter.next().data.format("%0.0f");
         }
 
-        s = "bat: " + stats.battery.format("%0.0f");
-        y += drawTextY(dc,xCenter,y,F2,s,JC,ClrFG);
-        
         // settings.connectionAvailable, connectionInfo, phoneConnected
         // screenshape
         
         var ver = settings.monkeyVersion;
-        s = Lang.format("fw: $1$.$2$ mnkyV: $3$.$4$.$5$", 
+        s = Lang.format("fw$1$.$2$ CIQ$3$.$4$.$5$", 
             [settings.firmwareVersion[0],settings.firmwareVersion[1],
              ver[0],ver[1],ver[2]]); 
         y += drawTextY(dc,xCenter,y,F2,s,JC,ClrFG);        
@@ -104,5 +101,9 @@ class PgHomeView extends Ui.View
         y += drawTextY(dc,xCenter,y,F2,Lang.format("dc: $1$,$2$",[dc.getWidth(), dc.getHeight()]),JC,ClrFG);
         if ((cxScreen != dc.getWidth()) || (cyScreen != dc.getHeight()))        
             {y += drawTextY(dc,xCenter,y,F2,Lang.format("scr: $1$,$2$",[cxScreen,cyScreen]),JC,ClrFG);}
+
+        s = "bat: " + stats.battery.format("%0.0f");
+        y += drawTextY(dc,xCenter,y,F2,s,JC,ClrFG);
+        
     }
 }

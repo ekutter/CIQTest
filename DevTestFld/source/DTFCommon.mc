@@ -78,7 +78,7 @@ function strDist(dist) //in meters
 const earthR = 6371e3; //earth's radius in meters
 const SCtoRad = Pi / 2147483648.0; //rad=lat,lon * SCtoRad - 0.00000000146291811998
 const RadtoMtr = 6356852.14; //at equater
-var SCtoMtr =0.01157;//0.007524748;// 0.00933;// 40075000f/â€­4294967296f; //=0.0093306880444288 
+var SCtoMtr =0.01157;//0.007524748;// 0.00933;// 40075000f/â?­4294967296f; //=0.0093306880444288 
 function distCalc(lon1, lat1, lon2, lat2)
 {
     //lon/lat
