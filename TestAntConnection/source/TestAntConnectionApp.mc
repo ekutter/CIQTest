@@ -12,7 +12,7 @@ class TestAntConnectionApp extends Application.AppBase
     function initialize() 
     {
         AppBase.initialize();
-        timer.start( method(:onTimerTic),10000,true);
+        timer.start( method(:onTimerTic),3000,true);
     }
 
     //---------------------------------
@@ -32,13 +32,15 @@ class TestAntConnectionApp extends Application.AppBase
     //-------------------------------------------
     function onStart(state) 
     {
-        sensor = new SensorSimple(SensorSimple.DEV_TRACKER);
+        //sensor = new SensorSimple(SensorSimple.DEV_TRACKER);
+        sensor = new SensorSimple(SensorSimple.DEV_FOOTPOD);
     }
 
     //-------------------------------------------
     function onStop(state) 
     {
-        sensor.closeSensor();
+        //sensor.closeSensor();
+        sensor.release();
     }
 
     //-------------------------------------------

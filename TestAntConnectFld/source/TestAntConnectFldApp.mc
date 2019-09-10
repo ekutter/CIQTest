@@ -1,8 +1,7 @@
 using Toybox.Application;
 using Toybox.WatchUi as Ui;
 
-
-    var sensor;
+var sensor;
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 class TestAntConnectFldApp extends Application.AppBase 
@@ -17,13 +16,15 @@ class TestAntConnectFldApp extends Application.AppBase
     //-------------------------------------------
     function onStart(state) 
     {
-        sensor = new SensorSimple(SensorSimple.DEV_TRACKER);
+//        sensor = new SensorSimple(SensorSimple.DEV_TRACKER);
+        sensor = new SensorSimple(SensorSimple.DEV_FOOTPOD);
     }
 
     //-------------------------------------------
     function onStop(state) 
     {
-        sensor.closeSensor();
+        //sensor.closeSensor();
+        sensor.release();
     }
 
     //! Return the initial view of your application here

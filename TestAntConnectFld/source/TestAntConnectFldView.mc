@@ -16,7 +16,7 @@ class TestAntConnectFldView extends Ui.DataField
     //-----------------------------------------------------
     function compute(info) 
     {
-        if (((Sys.getTimer() / 1000) % 10) == 0)
+        if (((Sys.getTimer() / 1000) % 3) == 0)
         {
             if (sensor.searching)
             {
@@ -54,7 +54,6 @@ function addMsg(str)
     {
         rgmsg.remove(rgmsg[0]);
     }
-    //Ui.requestUpdate();
 }
 
 //-----------------------------------------------------

@@ -14,7 +14,7 @@ class SensorSimple extends Ant.GenericChannel
         DEV_FOOTPOD, //=124, 16268
         }
 
-    static var rgDevType = [25,41,120,123,124];
+    static var rgDevType = [25,41,120,124];
     static var rgDevName = ["Tempe","Tracker","HR","FootPod"];
     static var rgDevPeriod = [65535,2048,8070,16268];
 
@@ -41,6 +41,8 @@ class SensorSimple extends Ant.GenericChannel
 
         var iTimeout = (30000 / 2.5 / 1000).toNumber()-1;
         Sys.println("iTimeout: " + iTimeout);
+        Sys.println("period=" + rgDevPeriod[iDevType]);
+        Sys.println("devtype=" + rgDevType[iDevType] + ", " + rgDevName[iDevType]);
 
         // Set the configuration
         deviceCfg = new Ant.DeviceConfig( {
@@ -68,9 +70,9 @@ class SensorSimple extends Ant.GenericChannel
     function open() 
     {
         // Open the channel
-        GenericChannel.open();
+        var fSuccess = GenericChannel.open();
         searching = true;
-        addMsg("open - searching");
+        addMsg("open=" + fSuccess);
     }
 
     //-----------------------------------------------------
@@ -95,7 +97,7 @@ class SensorSimple extends Ant.GenericChannel
                 // Update our device configuration primarily to see the device number of the sensor we paired to
                 deviceCfg = GenericChannel.getDeviceConfig();
                 antid = msg.deviceNumber;
-                addMsg("connected");
+                addMsg("connected: " + antid);
             }
             cMsg = (cMsg + 1) %1000;
         } 
