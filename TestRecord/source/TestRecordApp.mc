@@ -10,7 +10,7 @@ using Toybox.Application;
 using Toybox.Position;
 using Toybox.WatchUi;
 
-var fHR = false;
+var fHR = true;
 class TestRecordApp extends Application.AppBase {
 
     var timer;
