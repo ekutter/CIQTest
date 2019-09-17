@@ -9,7 +9,7 @@
 
 using Toybox.WatchUi;
 using Toybox.Graphics;
-using Toybox.System;
+using Toybox.System as Sys;
 using Toybox.Lang;
 using Toybox.ActivityRecording;
 using Toybox.Activity as Act;
@@ -22,11 +22,20 @@ class BaseInputDelegate extends WatchUi.BehaviorDelegate
     function initialize() {
         BehaviorDelegate.initialize();
     }
+    function onKey(evt)
+    {
+        if (evt.getKey() == WatchUi.KEY_ENTER)
+        {
+            toggleStartStop();
+        }   
+    }
 
-    function onMenu() {
+    function onMenu() {}
+    function toggleStartStop()
+    {
         if( Toybox has :ActivityRecording ) {
             if( ( session == null ) || ( session.isRecording() == false ) ) {
-                session = ActivityRecording.createSession({:name=>"TestCIQApp" +fHR?"T":"F", :sport=>ActivityRecording.SPORT_WALKING});
+                session = ActivityRecording.createSession({:name=>("TestCIQApp" +(fHR?"T":"F")), :sport=>ActivityRecording.SPORT_WALKING});
                 session.start();
                 WatchUi.requestUpdate();
             }
@@ -38,6 +47,12 @@ class BaseInputDelegate extends WatchUi.BehaviorDelegate
             }
         }
         return true;
+    }
+    function onBack()
+    {
+        Sys.println(view.rgGPSQual);
+        Sys.println(view.rgcQual);
+        return(session != null);
     }
 }
 
@@ -75,6 +90,7 @@ class TestRecordView extends WatchUi.View {
     var rgclr = [Graphics.COLOR_BLACK,Graphics.COLOR_RED,Graphics.COLOR_ORANGE,Graphics.COLOR_YELLOW,Graphics.COLOR_GREEN];
     var rgcQual = [0,0,0,0,0];
     var strAccuracy = "N/A";
+    
     //! Update the view
     function onUpdate(dc) {
         // Set background color
@@ -83,16 +99,9 @@ class TestRecordView extends WatchUi.View {
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
         dc.fillRectangle(0, 0, dc.getWidth(), dc.getHeight());
         dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_WHITE);
-        dc.drawText(dc.getWidth()/2, 0, Graphics.FONT_XTINY, "M:"+System.getSystemStats().usedMemory, Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(dc.getWidth()/2, 0, Graphics.FONT_XTINY, "M:"+Sys.getSystemStats().usedMemory, Graphics.TEXT_JUSTIFY_CENTER);
 
         if( Toybox has :ActivityRecording ) {
-            // Draw the instructions
-            //if( ( session == null ) || ( session.isRecording() == false ) ) {
-            //    dc.setColor(Graphics.COLOR_BLUE, Graphics.COLOR_WHITE);
-            //    dc.drawText(dc.getWidth() / 2, dc.getHeight() / 2, Graphics.FONT_MEDIUM, "Press Menu to\nStart Recording", Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
-            //}
-            //else if( ( session != null ) && session.isRecording() ) 
-            {
                 var x = dc.getWidth() / 2;
                 var y = dc.getFontHeight(Graphics.FONT_XTINY);
                 var dy = dc.getFontHeight(Graphics.FONT_MEDIUM);
@@ -105,25 +114,44 @@ class TestRecordView extends WatchUi.View {
                     strAccuracy = rgGPSQual[info.currentLocationAccuracy];
                     clr = rgclr[info.currentLocationAccuracy];                           
                 }
+                else
+                {
+                    strAccuracy = "null";
+                }
                 dc.setColor(clr, Graphics.COLOR_WHITE);
                 
                 dc.drawText(x, y, Graphics.FONT_MEDIUM, "GPS: " + strAccuracy, Graphics.TEXT_JUSTIFY_CENTER);
                 y += dy;
                 
+                dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
+                
                 dc.drawText(x, y, Graphics.FONT_MEDIUM, Lang.format("$1$,$2$,$3$,$4$,$5$",rgcQual), Graphics.TEXT_JUSTIFY_CENTER);
                 y += dy;
-                
-                dc.drawText(x, y, Graphics.FONT_MEDIUM, strDist(info.elapsedDistance) + "mi" , Graphics.TEXT_JUSTIFY_CENTER);
-                y += dy;
-                
-                dc.drawText(x, y, Graphics.FONT_MEDIUM, strDur(info.timerTime) , Graphics.TEXT_JUSTIFY_CENTER);
-                y += dy;
-                
-                dc.setColor(Graphics.COLOR_BLUE, Graphics.COLOR_WHITE);
-                var strMsg = (( session == null) || (session.isRecording() == false)) ?
-                    "Press Menu to\nStart Recording" : "Press Menu again\nto Stop and Save\nthe Recording";
-                dc.drawText(x, y, Graphics.FONT_MEDIUM, strMsg, Graphics.TEXT_JUSTIFY_CENTER);
-            }
+
+                if ((session != null) && session.isRecording())
+                {               
+                    dc.drawText(x, y, Graphics.FONT_MEDIUM, strDist(info.elapsedDistance) + "mi" , Graphics.TEXT_JUSTIFY_CENTER);
+                    y += dy;
+                    
+                    dc.drawText(x, y, Graphics.FONT_MEDIUM, strDur(info.timerTime) , Graphics.TEXT_JUSTIFY_CENTER);
+                    y += dy;
+    
+                    if ((info has :altitude) && (info.altitude != null))
+                    {
+                        dc.drawText(x, y, Graphics.FONT_MEDIUM, (info.altitude*3.28084).toNumber() + "'" , Graphics.TEXT_JUSTIFY_CENTER);
+                        y += dy;
+                    }
+                    
+                    if ((info has :currentHeartRate) && (info.currentHeartRate != null))
+                    {
+                        dc.drawText(x, y, Graphics.FONT_MEDIUM, info.currentHeartRate + "bpm" , Graphics.TEXT_JUSTIFY_CENTER);
+                        y += dy;
+                    }
+                }
+                else
+                {
+                    dc.drawText(x, y, Graphics.FONT_MEDIUM, "Press Start", Graphics.TEXT_JUSTIFY_CENTER);
+                }
         }
         // tell the user this sample doesn't work
         else {

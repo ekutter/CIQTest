@@ -11,10 +11,12 @@ using Toybox.Position;
 using Toybox.WatchUi;
 
 var fHR = true;
+var view;
+
+
 class TestRecordApp extends Application.AppBase {
 
     var timer;
-    var view;
 
     function initialize() {
         AppBase.initialize();
