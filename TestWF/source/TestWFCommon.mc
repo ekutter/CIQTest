@@ -34,7 +34,7 @@ function strTime(clockTime,fLong)
 (:background)
 function logMsg(str)
 {
-    Sys.println(Lang.format("$1$: $2$",[strTimeOfDay(true),str]));
+    Sys.println(Lang.format("$2$: $1$: $3$",[fInBackground ? "BG" : "  ", strTimeOfDay(true),str]));
 }
 
 //-----------------------------------------------------

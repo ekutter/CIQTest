@@ -24,6 +24,7 @@ class WF1Delegate extends Ui.WatchFaceDelegate
     //-----------------------------------------------------
     function initialize() 
     {
+        logMsg("WF1Delegate.init");
         WatchFaceDelegate.initialize(); 
     }
 
@@ -48,7 +49,7 @@ class WF1View extends Ui.WatchFace
     function initialize() 
     {
         WatchFace.initialize();
-        Sys.println("WF1View init");
+        logMsg("WF1View.init");
 
         do1hz = ( Toybox.WatchUi.WatchFace has :onPartialUpdate );
         canDo1hz=do1hz;  
@@ -58,6 +59,12 @@ class WF1View extends Ui.WatchFace
     //-----------------------------------------------------
     function onShow() 
     {
+        logMsg("WF1View.show");
+    }
+    //-----------------------------------------------------
+    function onHide() 
+    {
+        logMsg("WF1View.hide");
     }
 
     //-----------------------------------------------------
@@ -129,7 +136,7 @@ class WF1View extends Ui.WatchFace
         }   
 
         //---- weather station data
-        if (bgdata != null)
+        if (wsdata != null)
         {
             //Sys.println(wsdata);
             if (wsdata != null)
@@ -218,10 +225,6 @@ class WF1View extends Ui.WatchFace
         //dc.drawText(192,145,Gfx.FONT_SMALL,strSec,Gfx.TEXT_JUSTIFY_LEFT); //first pixels close to y
         
     }
-    //-----------------------------------------------------
-    function onHide() {
-    }
-
     //-----------------------------------------------------
     function onExitSleep() 
     {

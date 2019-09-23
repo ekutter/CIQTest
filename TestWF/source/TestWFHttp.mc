@@ -36,35 +36,31 @@ class HttpData
         if (responseCode == 200)
         
         {
-            Sys.println(data);
-            //data = data["ws"];
+            logMsg("HTTP.onNewData");
         }
         else
         {
-            Sys.println("onNewData: error=" + responseCode + ", " + data);
+            logMsg("HTTP.onNewData: error=" + responseCode + ", " + data);
             data = null; 
         }
-        Background.exit(data);
-        //        Ui.requestUpdate();
+        Background.exit(data["ws"]);
     }
 
     var c = 0;
     //-----------------------------------------------
     function sendDataRequest()
     {
-        logMsg("background: sendDataRequest");
-        //if (Sys.getDeviceSettings().phoneConnected)
+        logMsg("HTTP.sendDataRequest ph=" + Sys.getDeviceSettings().phoneConnected);
         if (!fTestWebRequest)
         {
             c++;
-            var data = Ui.loadResource(Rez.JsonData.testHTTP);
+            //var data = Ui.loadResource(Rez.JsonData.testHTTP); //not working in current beta
             
-//            var data = [c, 70, 72, 66, 51, 51, 57, 68, 3, 3, 41, 90, 4, 1, 0];
+            var data = [c, 70, 72, 66, 51, 51, 57, 68, 3, 3, 41, 90, 4, 1, 0];
             Background.exit(data);
         }
         else
         {
-            logMsg("background: makeWebRequest");        
             var latlon = "m44.0330055,-121.3642440"; //bend
             Comm.makeWebRequest(
                 "https://mtyquinn.com/MyHouse/HandlerWSSrv.ashx/Api/CIQInfo",

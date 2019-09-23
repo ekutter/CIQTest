@@ -8,14 +8,10 @@ using Toybox.Background;
 //-----------------------------------------------------------------------------
 var OSDATA="osdata";
 
-var fCanDoBG=false;
+var fCanDoBG=true;
 var fInBackground=false;    
 
-var bgdata=null;
 var wsdata = null;
-var lights=0;
-var fGrgDrOpen=false;  //these get reset if no data for too long
-var fFireplace=false;
 
 const fTestWebRequest = true;
 
@@ -26,30 +22,26 @@ class WF1App extends App.AppBase {
     function initialize() 
     {
         AppBase.initialize();
-        logMsg(Lang.format("TestWF App initializev v1.0, testwebrequest=$1$",[fTestWebRequest]));
+        logMsg("App.init");
     }
 
     //-----------------------------------------------------
     function onStart(state) 
     {
-        logMsg("onStart: fInBG =" + fInBackground);
+        logMsg("App.onStart");
     }
 
     //-----------------------------------------------------
     //only gets called at the ver end, by the main process, not background
     function onStop(state) 
     {
-        logMsg("onStop: fInBG =" + fInBackground);
-//        if(!fInBackground) 
-//        {
-//            logMsg("onStop");    
-//        }
+        logMsg("App.onStop");
     }
 
     //-----------------------------------------------------
     function getInitialView() 
     {
-        logMsg("FG: getInitView");
+        logMsg("App.getInitView");
         if(Toybox.System has :ServiceDelegate) 
         {
             fCanDoBG=true;
@@ -66,26 +58,23 @@ class WF1App extends App.AppBase {
     //-----------------------------------------------------
     function onBackgroundData(data) 
     {
-        var str;
+        logMsg("App.onBackgroundData");
         cBG++;
-        bgdata=data;
-        if ((data != null) && (data["ws"] != null) && (data["ws"].size() > WS_LTS))
+        if ((data != null) && (data.size() > WS_LTS))
         {
-            wsdata = data["ws"];
-            str = wsdata;
+            wsdata = data;
         }
         else
         {
             wsdata = null;
-            str = "no WS data";
         }
-        logMsg("onBackgroundData="+str);
-        App.getApp().setProperty(OSDATA,bgdata);
         Ui.requestUpdate();
     }    
     //-----------------------------------------------------
     function getServiceDelegate()
     {
+        fInBackground=true; //pretty sure this only gets called for background
+   
         logMsg("getServiceDelegate");
         return [new WF1BgServiceDelegate()];
     }
@@ -99,7 +88,7 @@ class WF1BgServiceDelegate extends Toybox.System.ServiceDelegate {
     var http;
     function initialize() 
     {
-        logMsg("background: BgServiceDelegate - init");
+        logMsg("ServiceDelegate.init");
         Sys.ServiceDelegate.initialize();
         fInBackground=true;             //trick for onExit()
         http = new HttpData();
@@ -109,7 +98,6 @@ class WF1BgServiceDelegate extends Toybox.System.ServiceDelegate {
     //-----------------------------------------------------
     function onTemporalEvent() 
     {
-        logMsg("background:onTemporalEvent");
-        //Background.exit(null);
+        logMsg("ServiceDelegate.onTemporalEvent");
     }
 }
