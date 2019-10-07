@@ -13,19 +13,18 @@ using Toybox.WatchUi;
 var fHR = true;
 var view;
 
-
-class TestRecordApp extends Application.AppBase {
-
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+class TestRecordApp extends Application.AppBase 
+{
     var timer;
 
-    function initialize() {
-        AppBase.initialize();
-    }
+    //-------------------------------------------
+    function initialize() {AppBase.initialize();}
 
-    //! onStart() is called on application start up
-    //! We need to enable the location events for now so that we make sure GPS
-    //! is on.
-    function onStart(state) {
+    //-------------------------------------------
+    function onStart(state) 
+    {
         Position.enableLocationEvents(Position.LOCATION_CONTINUOUS, method(:onPosition));
         
         if (fHR) {Sensor.setEnabledSensors([Sensor.SENSOR_HEARTRATE]);}
@@ -34,22 +33,23 @@ class TestRecordApp extends Application.AppBase {
         timer.start(method(:onTimer),1000,true);
     }
 
-    //---------------------------------
+    //-------------------------------------------
     function onTimer()
     {
         WatchUi.requestUpdate();
     }
 
-    //! onStop() is called when your application is exiting
-    function onStop(state) {
+    //-------------------------------------------
+    function onStop(state) 
+    {
         view.stopRecording();
         Position.enableLocationEvents(Position.LOCATION_DISABLE, method(:onPosition));
     }
 
-    function onPosition(info) {
-    }
+    //-------------------------------------------
+    function onPosition(info) {}
 
-    //! Return the initial view of your application here
+    //-------------------------------------------
     function getInitialView() {
         view = new TestRecordView();
         return [ view, new BaseInputDelegate() ];
