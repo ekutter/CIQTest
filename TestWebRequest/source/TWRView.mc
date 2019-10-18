@@ -22,7 +22,7 @@ class TestWebRequestView extends Ui.View
     var cErr = 0;               //how many error responses have we had
     var cResponse;              //how many successful responses did we get
     
-    var cReqInt = 300; 
+    var cReqInt = 3300; 
     
     //---------------------------------
     function initialize() 
@@ -66,9 +66,16 @@ class TestWebRequestView extends Ui.View
     //---------------------------------
     // Receive the data from the web request
     var strMsg;
+    var lastResponseCode = 0;
+    var lastUnknownCode = "";
+    var c104 = 0;
+    var c2 = 0;
+    var cOther = 0;
+   
     function onReceive(responseCode, data) 
     {
-        Sys.println("OnReceive");
+        //Sys.println("OnReceive");
+        lastResponseCode=responseCode;
         if (responseCode == 200) 
         {
             cResponse++;
@@ -99,7 +106,10 @@ class TestWebRequestView extends Ui.View
         }
         else
         {
-            cErr++;
+            if (responseCode == -104) {++c104;}
+            else if (responseCode == -2) {++c2;}
+            else {cErr++; lastUnknownCode=responseCode;}
+            
             tmRequest = null;
             if (cErr <= 10) //only print the first 10.  Fills up the log file after that
             {
@@ -114,7 +124,7 @@ class TestWebRequestView extends Ui.View
         //don't bother making the request if there is no phone connected
         //if (Sys.getDeviceSettings().phoneConnected)
         {
-            Sys.println("MakeRequest");
+            //Sys.println("MakeRequest");
             tmRequest = Sys.getTimer();
             cRequest++;
             
@@ -138,8 +148,8 @@ class TestWebRequestView extends Ui.View
     {
         var xCenter = dc.getWidth() / 2;
         var y = 0;
-        var fnt = F4;
-        var cyLine = dc.getFontHeight(fnt) - 6; //text line spacing
+        var fnt = F2;
+        var cyLine = dc.getFontAscent(fnt)+2;
 
         dc.setColor(ClrWhite, ClrBlack);
         dc.clear();
@@ -149,12 +159,16 @@ class TestWebRequestView extends Ui.View
         y += cyLine;
         dc.drawText(xCenter, y, fnt, "cRes=" + cResponse, JC);
         y += cyLine;
-        dc.drawText(xCenter, y, fnt, "cErr=" + cErr + ", int=" + Math.round(cReqInt/1000), JC);
+        dc.drawText(xCenter, y, fnt, "2=" + c2 + ", 104=" + c104, JC);
+        y += cyLine;
+        dc.drawText(xCenter, y, fnt, "UK=" + cErr + ", interval=" + (cReqInt/1000.0).format("%.1f"), JC);
         y += cyLine;
         dc.drawText(xCenter, y, fnt, "DurPend=" + 
           ((tmRequest != null) ? strDur(Sys.getTimer() - tmRequest) : "0:00"), JC);
         y += cyLine;
         dc.drawText(xCenter, y, fnt, strTimeOfDay(true) + " - " + strLastSuccess, JC);
+        y += cyLine;
+        dc.drawText(xCenter, y, fnt, "last=" + lastResponseCode + ", UK=" + lastUnknownCode, JC);
         y += cyLine;
         dc.drawText(xCenter, y, fnt, "boot:"+strDur(Sys.getTimer()), JC);
     }

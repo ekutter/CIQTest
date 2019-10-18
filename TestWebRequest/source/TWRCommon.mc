@@ -22,7 +22,7 @@ function strTimeOfDay(fLong)
     return (str);
 }
 //-----------------------------------------------------
-// ms to [[hh:]m]m:ss
+// ms to [[[dd]hh:]m]m:ss
 function strDur(time)
 {
     if (time==null) {return("--");}
@@ -32,7 +32,13 @@ function strDur(time)
     var minutes = ((tm % (60*60)) / 60).toNumber();
     var seconds = (tm % 60).toNumber();
     var strTime;
-    if (hours > 0)
+    if (hours > 48)
+    {
+        var days = (hours / 24).toNumber();
+        hours = hours % 24;
+        strTime = days + "d" + hours.format("%02u") + ":" + minutes.format("%02u");
+    }
+    else if (hours > 0)
     {
         strTime = hours +":" + minutes.format("%02u")+":"+seconds.format("%02u");
     }
