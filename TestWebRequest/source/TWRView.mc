@@ -22,7 +22,7 @@ class TestWebRequestView extends Ui.View
     var cErr = 0;               //how many error responses have we had
     var cResponse;              //how many successful responses did we get
     
-    var cReqInt = 3300; 
+    var cReqInt = 3000; 
     
     //---------------------------------
     function initialize() 
@@ -65,6 +65,13 @@ class TestWebRequestView extends Ui.View
     
     //---------------------------------
     // Receive the data from the web request
+    // errors I've seen:
+    //  -2 - BLE_HOST_TIMEOUT - common
+    //  -104 - BLE_CONNECTION_UNAVAILABLE - common - no connection
+    //
+    //  -1 - BLE_ERROR - only once on the Fairway
+    //  -300 - NETWORK_REQUEST_TIMEOUT - only once on the Fairway
+    
     var strMsg;
     var lastResponseCode = 0;
     var lastUnknownCode = "";
@@ -159,9 +166,9 @@ class TestWebRequestView extends Ui.View
         y += cyLine;
         dc.drawText(xCenter, y, fnt, "cRes=" + cResponse, JC);
         y += cyLine;
-        dc.drawText(xCenter, y, fnt, "2=" + c2 + ", 104=" + c104, JC);
+        dc.drawText(xCenter, y, fnt, "-2=" + c2 + ", -104=" + c104, JC);
         y += cyLine;
-        dc.drawText(xCenter, y, fnt, "UK=" + cErr + ", interval=" + (cReqInt/1000.0).format("%.1f"), JC);
+        dc.drawText(xCenter, y, fnt, "other=" + cErr + ", interval=" + (cReqInt/1000.0).format("%.1f"), JC);
         y += cyLine;
         dc.drawText(xCenter, y, fnt, "DurPend=" + 
           ((tmRequest != null) ? strDur(Sys.getTimer() - tmRequest) : "0:00"), JC);
