@@ -37,13 +37,14 @@ class HttpData
         
         {
             logMsg("HTTP.onNewData");
+            
         }
         else
         {
             logMsg("HTTP.onNewData: error=" + responseCode + ", " + data);
             data = null; 
         }
-        Background.exit(data["ws"]);
+        Background.exit((data == null) ? null : data["ws"]);
     }
 
     var c = 0;

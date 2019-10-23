@@ -20,9 +20,11 @@ class TestWebRequestView extends Ui.View
     var tmStart;                //what time did we start the app
     var cRequest = 0;           //how many requests have been made
     var cErr = 0;               //how many error responses have we had
-    var cResponse;              //how many successful responses did we get
+    var cResponse = 0;              //how many successful responses did we get
     
-    var cReqInt = 3000; 
+    var cReqInt = 3000;
+    
+    var fTrackPersistance = false; 
     
     //---------------------------------
     function initialize() 
@@ -32,21 +34,25 @@ class TestWebRequestView extends Ui.View
         Sys.println("Req Int: " + cReqInt);
         Sys.println("phone connected: " + Sys.getDeviceSettings().phoneConnected); 
 
-        cResponse = App.getApp().getProperty("cResponse");
-        if (cResponse == null) {cResponse = 0;}        
-
-        var tmResponse = App.getApp().getProperty("tmResponse");
-
-        if ((tmResponse == null) || (tmResponse > Sys.getTimer()))
+        // do we want tracking data across runs?
+        if (fTrackPersistance)
         {
-            Sys.println("reboot detected");
-            cResponse = 0;
-            App.getApp().setProperty("cResponse",0);
-            App.getApp().setProperty("tmResponse",0);
-        }
-        else
-        {
-            Sys.println("init cResponse: " + cResponse);
+            cResponse = App.getApp().getProperty("cResponse");
+            if (cResponse == null) {cResponse = 0;}        
+        
+            var tmResponse = App.getApp().getProperty("tmResponse");
+        
+            if ((tmResponse == null) || (tmResponse > Sys.getTimer()))
+            {
+                Sys.println("reboot detected");
+                cResponse = 0;
+                App.getApp().setProperty("cResponse",0);
+                App.getApp().setProperty("tmResponse",0);
+            }
+            else
+            {
+                Sys.println("init cResponse: " + cResponse);
+            }
         }
     }
 

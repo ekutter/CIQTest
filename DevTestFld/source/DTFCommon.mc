@@ -65,10 +65,13 @@ function strDur(time)
 }
 
 //-----------------------------------------------------
+function strAlt(mtr) {return((mtr != null) ? (mtr * FtPerMeter).format("%d") : "--");}
+
+//-----------------------------------------------------
 function strDist(dist) //in meters 
 {
     if (dist == null) {return("--");}
- 	dist /= kmmiDistCvt;      
+    dist /= kmmiDistCvt;      
     return(dist.format("%.2f"));
 }
 

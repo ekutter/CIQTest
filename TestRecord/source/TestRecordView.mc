@@ -18,7 +18,7 @@ var session = null;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-class BaseInputDelegate extends WatchUi.InputDelegate // WatchUi.BehaviorDelegate
+class BaseInputDelegate extends WatchUi.BehaviorDelegate
 {
     //-------------------------------------------
     function initialize() {InputDelegate.initialize();}
@@ -39,7 +39,12 @@ class BaseInputDelegate extends WatchUi.InputDelegate // WatchUi.BehaviorDelegat
             return(false);
         }
     }
-
+    //-------------------------------------------
+    function onSelect()
+    {
+        Sys.println("onSelect");
+        return(false);
+    }
     //-------------------------------------------
     function onHold(evt) {Sys.println("onHold: "); toggleStartStop();} //S62 never gets the onKey(Enter) after the activity is starated
     

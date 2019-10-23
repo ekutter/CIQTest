@@ -1,22 +1,48 @@
-using Toybox.Application;
+using Toybox.Application as App;
+using Toybox.WatchUi as Ui;
+using Toybox.Graphics as Gfx;
+using Toybox.System as Sys;
 
-class DevTestFldApp extends Application.AppBase {
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+var xyTap = null;
 
+class DevTestFldApp extends App.AppBase {
+
+    //-------------------------------------------
     function initialize() {
         AppBase.initialize();
     }
 
-    // onStart() is called on application start up
+    //-------------------------------------------
     function onStart(state) {
     }
 
-    // onStop() is called when your application is exiting
+    //-------------------------------------------
     function onStop(state) {
     }
 
-    //! Return the initial view of your application here
+    //-------------------------------------------
     function getInitialView() {
-        return [ new DevTestFldView() ];
+        return [ new DevTestFldView(), new DevTestFldDelegate() ];
     }
 
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+class DevTestFldDelegate extends Ui.InputDelegate
+{
+    //-------------------------------------------
+    function onTap(evt)
+    {
+        xyTap = "tap "+evt.getCoordinates(); 
+        Sys.println("onTap: type=" + evt.getType() + ", coord="  + evt.getCoordinates());
+         
+    }
+    function onHold(evt)
+    {
+        xyTap = "hold "+evt.getCoordinates(); 
+        Sys.println("onHold: type=" + evt.getType() + ", coord="  + evt.getCoordinates()); 
+    }
 }

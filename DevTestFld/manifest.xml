@@ -17,8 +17,13 @@
             <iq:product id="fr945"/>
             <iq:product id="marqathlete"/>
             <iq:product id="vivoactive3"/>
+            <iq:product id="vivoactive4"/>
         </iq:products>
-        <iq:permissions/>
+        <iq:permissions>
+            <iq:uses-permission id="FitContributor"/>
+            <iq:uses-permission id="SensorHistory"/>
+            <iq:uses-permission id="UserProfile"/>
+        </iq:permissions>
         <iq:languages/>
         <iq:barrels/>
     </iq:application>

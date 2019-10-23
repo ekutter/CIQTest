@@ -23,13 +23,29 @@ class TestWFZeroView extends WatchUi.WatchFace {
     // Update the view
     function onUpdate(dc) {
         // Get and show the current time
-        var clockTime = System.getClockTime();
-        var timeString = Lang.format("$1$:$2$", [clockTime.hour, clockTime.min.format("%02d")]);
         var view = View.findDrawableById("TimeLabel");
-        view.setText(timeString);
+        view.setText(strTime(false));
 
         // Call the parent onUpdate function to redraw the layout
         View.onUpdate(dc);
+    }
+    function strTime(fLong)
+    {    
+        var hour, min, result;
+        var clockTime = System.getClockTime();
+        
+        hour = clockTime.hour % 12;
+        hour = (hour == 0) ? 12 : hour;
+        min = clockTime.min;
+    
+        var str = Lang.format("$1$:$2$",[hour, min.format("%02d")]);
+    
+        if (fLong)
+        {
+            var ampm = (clockTime.hour < 12) ? "a" : "p";
+            str = str + Lang.format(":$1$",[clockTime.sec.format("%02d")]);
+        }
+        return (str);
     }
 
     // Called when this View is removed from the screen. Save the
