@@ -9,6 +9,7 @@
 using Toybox.Application;
 using Toybox.Position;
 using Toybox.WatchUi;
+using Toybox.System as Sys;
 
 var fHR = true;
 var view;
@@ -27,7 +28,7 @@ class TestRecordApp extends Application.AppBase
     {
         Position.enableLocationEvents(Position.LOCATION_CONTINUOUS, method(:onPosition));
         
-        if (fHR) {Sensor.setEnabledSensors([Sensor.SENSOR_HEARTRATE]);}
+        if (fHR) {Sys.println("HRSensor enabled"); Sensor.setEnabledSensors([Sensor.SENSOR_HEARTRATE]);}
 
         timer = new Timer.Timer(); //on timer needs to be here for the epix
         timer.start(method(:onTimer),1000,true);

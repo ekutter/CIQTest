@@ -3,7 +3,7 @@ using Toybox.Graphics as Gfx;
 using Toybox.Lang as Lang;
 using Toybox.System as Sys;
 using Toybox.FitContributor as Fit;
-
+using Toybox.Attention as Att;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -48,6 +48,18 @@ class DevTestFldView extends Ui.DataField
         if (obscurityFlags & OBSCURE_BOTTOM) {str += "B";}
         if (obscurityFlags & OBSCURE_RIGHT) {str += "R";}
         return(str);
+    }
+
+    //-----------------------------------------------------
+    // onHide doesn't get called for data fields
+    var cShow = 0;
+    function onShow()
+    {
+        if (Att has :vibrate)
+            {Att.vibrate([new Att.VibeProfile(  100,400 )]);}
+    
+        Sys.println(strTimeOfDay() + " - " + strDur(dur) +  "- onShow()");
+        cShow++;
     }
 
     //-------------------------------------------
@@ -112,7 +124,8 @@ class DevTestFldView extends Ui.DataField
         dc.drawText(cx/2,y,F2,str, JC);
 
         y += dc.getFontHeight(F2);  
-        str = Lang.format("$1$,$2$,$3$",[cLayout, cCompute,cUpdate]);  
+        //str = Lang.format("$1$,$2$,$3$,Sh=$4$",[cLayout, cCompute,cUpdate,cShow]);  
+        str = Lang.format("upd=$1$,show=$2$",[cUpdate,cShow]);  
         dc.drawText(cx/2,y,F2,str, JC);
            
         y += dc.getFontHeight(F2);  
