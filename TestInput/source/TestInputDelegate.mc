@@ -24,7 +24,7 @@ class TestInputDelegate extends Ui.BehaviorDelegate
     function onTap(evt){AddMsg("Tap(" + strClick(evt) + ")");}
 
     function onBack() {AddMsg("onBack()"); return(false);}
-    function onMenu() {AddMsg("onBack()"); return(false);}
+    function onMenu() {AddMsg("onMenu()"); return(false);}
     function onNextMode() {AddMsg("onNextMode()"); return(false);}
     function onNextPage() {AddMsg("onNextPg()"); return(false);}
     function onPreviousMode() {AddMsg("onPrevMode()"); return(false);}
