@@ -12,6 +12,21 @@ class DevTestFldApp extends App.AppBase {
     //-------------------------------------------
     function initialize() {
         AppBase.initialize();
+
+        var set = Sys.getDeviceSettings();
+        var stats = Sys.getSystemStats();
+        
+        Sys.println("\n-----------\n"+strTimeOfDay() + ": DevTestFld initialize");
+        Sys.println("dist units=" + set.distanceUnits);
+        Sys.println("FW Version="+set.firmwareVersion);
+        Sys.println("24hr="+set.is24Hour);
+        Sys.println("monkey ver="+set.monkeyVersion);
+        Sys.println("part #="+set.partNumber);
+        Sys.println(Lang.format("mem used=$1$k, df max mem=$2$k",
+            [stats.usedMemory/1024, 
+             stats.totalMemory/1024]));
+        Sys.println("--------");
+             
     }
 
     //-------------------------------------------

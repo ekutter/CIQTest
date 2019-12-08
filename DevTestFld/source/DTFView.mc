@@ -55,8 +55,8 @@ class DevTestFldView extends Ui.DataField
     var cShow = 0;
     function onShow()
     {
-        if (Att has :vibrate)
-            {Att.vibrate([new Att.VibeProfile(  100,400 )]);}
+//        if (Att has :vibrate)
+//            {Att.vibrate([new Att.VibeProfile(  100,400 )]);}
     
         Sys.println(strTimeOfDay() + " - " + strDur(dur) +  "- onShow()");
         cShow++;
@@ -107,20 +107,33 @@ class DevTestFldView extends Ui.DataField
         dc.setColor(ClrWhite, ClrWhite);
         dc.clear();
         
-        dc.setColor(ClrRed,ClrTrans);
+        dc.setColor(ClrGreen,ClrTrans);
         dc.setPenWidth(4);
         dc.drawRectangle(0,0,cx,cy);
         
         dc.setColor(ClrBlack,ClrTrans);
-        var y = cy / 2 - dc.getFontHeight(F2);
+        var y = -dc.getFontDescent(F2)+2;// dc.getFontHeight(F2);
         var str;
-        y = 10;
-        
-        str = Lang.format("e=$1$,a=$2$",[strAlt(alt),strAlt(asc)]);  
-        dc.drawText(cx/2,y,F2,str, JC);
 
-        y += dc.getFontHeight(F2);  
+        var verCIQ = Sys.getDeviceSettings().monkeyVersion;
+        //verCIQ = verCIQ[0] * 10000 + verCIQ[1]*100 + verCIQ[2]; // [3, 1, 4] => 30104
+        
         str = Lang.format("$1$",[strDur(dur)]);  
+        dc.drawText(cx/2,y,F2,str, JC);
+        y += dc.getFontHeight(F2);  
+
+        str = Lang.format("[$1$,$2$] $3$ ",[cx,cy,strObscure()]);  
+        dc.drawText(cx/2,y,F2,str, JC);
+        y += dc.getFontHeight(F2);  
+
+        var stats = Sys.getSystemStats();
+        var strMem = Lang.format("mem: $1$k/$2$k",[stats.usedMemory/1024,stats.totalMemory/1024]);
+        dc.drawText(cx/2,y,F2,strMem, JC);
+        y += dc.getFontHeight(F2);  
+        
+        str = Lang.format("e=$1$,a=$2$",[strAlt(alt),strAlt(asc)]);
+        //var lvl = Sys.getSystemStats().battery;
+        //str = Lang.format("$1$% $2$.$3$.$4$",[lvl.format("%.2f"),verCIQ[0],verCIQ[1],verCIQ[2]]);  
         dc.drawText(cx/2,y,F2,str, JC);
 
         y += dc.getFontHeight(F2);  
@@ -128,25 +141,12 @@ class DevTestFldView extends Ui.DataField
         str = Lang.format("upd=$1$,show=$2$",[cUpdate,cShow]);  
         dc.drawText(cx/2,y,F2,str, JC);
            
-        y += dc.getFontHeight(F2);  
-        str = Lang.format("[$1$,$2$] $3$ ",[cx,cy,strObscure()]);  
-        dc.drawText(cx/2,y,F2,str, JC);
-
         if (xyTap != null)
         {
             y += dc.getFontHeight(F2);  
             dc.drawText(cx/2,y,F2,xyTap, JC);
         }
 
-        var stats = Sys.getSystemStats();
-        var strMem = Lang.format("mem: $1$k/$2$k",
-            [stats.usedMemory/1024, 
-             stats.totalMemory/1024]);
-
-
-        y += dc.getFontHeight(F2);  
-        dc.drawText(cx/2,y,F2,strMem, JC);
-        
     }
 
 }

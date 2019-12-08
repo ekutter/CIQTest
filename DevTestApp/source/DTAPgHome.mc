@@ -7,8 +7,31 @@ using Toybox.System as Sys;
 class PgHomeDelegate extends Ui.BehaviorDelegate
 {
     //---------------------------------
-    function onNextPage() {state.setPg(1);}     
-    function onPreviousPage() {state.setPg(-1);} 
+    function onNextPage() {Sys.println("home.onNextPage");state.setPg(1);}     
+    function onPreviousPage() {Sys.println("home.onPrevPage");state.setPg(-1);} 
+    function onSwipe(evt)
+    {
+         var swipe  = evt.getDirection();
+         Sys.println("home.onSwipe= " + swipe);
+         return(false);
+    }
+    function onMenu() {Sys.println("Home.onMenu: - next page");state.setPg(2);} //for when onNextPage not getting called.
+    function onKey(keyevt) 
+    {
+        var key = keyevt.getKey();
+        Sys.println("home.onKey: " + key);
+        switch (key)
+        {
+        case Ui.KEY_ENTER: state.setPg(3); return(true); //straight to the font page
+        default:
+            break;            
+        }
+        return(false);
+    }
+    function onKeyPressed(keyevt)
+    {
+        Sys.println("Home.onKeyPressed: " + keyevt.getKey());
+    }
 }
 
 //---------------------------------------------------------
