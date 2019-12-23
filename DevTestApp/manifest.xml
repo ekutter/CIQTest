@@ -2,7 +2,9 @@
     <iq:application entry="DevTestAppApp" id="14f8621fcf054c5a9a6970659a3db71f" launcherIcon="@Drawables.LauncherIcon" minSdkVersion="2.4.0" name="@Strings.AppName" type="watch-app" version="0.0.1">
         <iq:products>
             <iq:product id="approachs60"/>
+            <iq:product id="approachs62"/>
             <iq:product id="edge1030"/>
+            <iq:product id="edge1030plus"/>
             <iq:product id="edge520plus"/>
             <iq:product id="edge530"/>
             <iq:product id="edge820"/>
