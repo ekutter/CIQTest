@@ -33,13 +33,13 @@ const ClrDkPurple = 0x5500AA;//0xAA00FF;
 //JB - justify bottom
 //JN - none - don't show
 
-enum {F0, F1, F2, F3, F4,FN0, FN1, FN2, FN3, FX1, FX2, FCnt}
+enum {F0, F1, F2, F3, F4,FN0, FN1, FN2, FN3, FG, FGN, FX1, FX2, FCnt}
 enum {JR, JC, JL, JVC=4, JCC=5, JCORE=7, JBL=8, JT=16, JT_C=17, JB=32, JL_BL=10, JR_BL=8, JC_BL=9, JCL=6, JN=-1} //justify
 
 //--- FONT Metrics - we add in a level of indirection since stock fonts are indexes,
 //                   custom fonts are objects.
 var Fnt = [];  //list of font objects - mapping from fnt index to font
-var FntName =["F0 XTINY","F1 TINY","F2 SMALL","F3 MEDIUM","F4 LARGE","FN0 #MILD","FN1 #MEDIUM","FN2 #HOT","FN3 #THAIHOT"];
+var FntName =["F0 XTINY","F1 TINY","F2 SMALL","F3 MEDIUM","F4 LARGE","FN0 #MILD","FN1 #MEDIUM","FN2 #HOT","FN3 #THAIHOT", "F_GLANCE", "F_#GLANCE"];
 var FntHeight; //[FCount] - getFontHeight
 var FntAscent; //[FCount] - base line of font to top of box (last pixel in zero)
 //var FntDescent;//[FCount] - base line to bottom
@@ -66,9 +66,21 @@ function initDrawingHelper()
     FntCYOff = new [0];
     //add in the stock fonts
     logMsg.logMsg("index\theight\tascent\tdescent");
-    for (var i = 0; i < FX1; ++i)
+    for (var i = 0; i <= FN3; ++i)
     {
         addFont(i,null);
+    }
+    if (Gfx has :FONT_GLANCE)
+    {
+        addFont(Gfx.FONT_GLANCE,null);
+        addFont(Gfx.FONT_GLANCE_NUMBER,null);
+    	Sys.println("Glance fonts");
+    }
+    else
+    {
+    	addFont(F0,null);
+    	addFont(F0,null);
+    	Sys.println("No Glance fonts");
     }
 
     //MEMORYLIMIT
@@ -80,7 +92,7 @@ function initDrawingHelper()
     
     //Height, Ascent, Descent, CYGlyphAscent
     var sOut = "";
-    for (var i = F0; i <= FN3; ++i)
+    for (var i = F0; i <= FGN; ++i)
     {
 		sOut += Lang.format("$1$/$2$/$3$/$4$\t",[FntHeight[i], FntAscent[i], FntCYOff[i], FntAscent[i]-FntCYOff[i]]);    
     }
@@ -97,8 +109,8 @@ function addFont(f,name)
     //FntDescent.add(Gfx.getFontDescent(f)); //also approx margin top above pixels
     FntCYOff.add(Gfx.getFontDescent(f));  //not exact but close
     logMsg.logMsg(
-      Lang.format("$1$\t$2$\t$3$\t$4$",
-      [i,FntHeight[i], FntAscent[i], FntCYOff[i]]));
+      Lang.format("$1$\t$2$\t$3$\t$4$\t$5$",
+      [i,FntHeight[i], FntAscent[i], FntCYOff[i],FntName[i]]));
 }
 
 //---------------------------------
