@@ -2,6 +2,7 @@
     <iq:application entry="MapSampleApp" id="df3ec413558a4383842393f98440ecc1" launcherIcon="@Drawables.LauncherIcon" minSdkVersion="2.4.0" name="@Strings.AppName" type="watch-app" version="0.0.0">
         <iq:products>
             <iq:product id="edge1030"/>
+            <iq:product id="edge1030plus"/>
             <iq:product id="edge530"/>
             <iq:product id="fenix5plus"/>
             <iq:product id="fenix6"/>
