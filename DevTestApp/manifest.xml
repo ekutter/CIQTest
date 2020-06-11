@@ -8,6 +8,7 @@
             <iq:product id="edge520plus"/>
             <iq:product id="edge530"/>
             <iq:product id="edge820"/>
+            <iq:product id="enduro"/>
             <iq:product id="fenix5plus"/>
             <iq:product id="fenix6"/>
             <iq:product id="fenix6pro"/>
@@ -16,6 +17,7 @@
             <iq:product id="fenix6xpro"/>
             <iq:product id="fr245"/>
             <iq:product id="fr245m"/>
+            <iq:product id="fr745"/>
             <iq:product id="fr935"/>
             <iq:product id="fr945"/>
             <iq:product id="vivoactive3"/>

@@ -21,8 +21,36 @@ class LogMsg
     function initialize(f)
     {
         fSendMsg = f;
-        logMsg(Lang.format("starting $1$ $2$",[LogMsg.appName, LogMsg.devID]));
+//        var fw = Sys.getDeviceSettings().firmwareVersion;
+                
+        logMsg("-------  STARTING   ----------");                  
+        logMsg(LogMsg.appName);                 
+        logMsg(strDate()); 
         logMsg("Sys.getTimer(): " + Sys.getTimer());
+        
+        var settings = Sys.getDeviceSettings();
+        var stats = Sys.getSystemStats();
+        var s;
+
+        //these are basically identical to what gets displayed on the home screen
+        logMsg(Lang.format("p#: $1$", [settings.partNumber])); 
+        logMsg(Lang.format("id: $1$", [settings.uniqueIdentifier.substring(0,16)])); 
+        
+        logMsg(Lang.format("mem: $1$k/$2$k - $3$k",
+            [stats.usedMemory/1024, 
+             stats.totalMemory/1024,
+             stats.freeMemory/1024]));
+
+        var ver = settings.monkeyVersion;
+        logMsg(Lang.format("fw=$1$.$2$", 
+            [settings.firmwareVersion[0],settings.firmwareVersion[1].format("%2.2d")]));
+
+        logMsg(Lang.format("CIQ=$1$.$2$.$3$",ver)); 
+
+        logMsg(Lang.format("touch: $1$ btns: $2$", [settings.isTouchScreen ? "Y" : "N",settings.inputButtons])); 
+        logMsg(Lang.format("scr: $1$,$2$",[cxScreen,cyScreen]));
+        logMsg("bat: " + stats.battery.format("%0.0f"));
+        logMsg("-------------------------------");
     }
     
     //-----------------------------------------------------

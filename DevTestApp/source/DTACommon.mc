@@ -6,6 +6,8 @@ using Toybox.Time as Time;
 using Toybox.Attention as Att;
 using Toybox.WatchUi as Ui;
 using Toybox.Communications as Comm;
+using Toybox.Time.Gregorian as Calendar;
+
 
 const FloatMax =  3.40282347E38.toFloat();
 const FloatMin = -3.402823E38.toFloat();
@@ -70,6 +72,19 @@ function strTime(clockTime,fLong)
     }
     return (str);
 }
+
+//-----------------------------------------------------
+function strDate()
+{
+    var now = Time.now();
+    var tminfo = Calendar.info(now,Time.FORMAT_SHORT);
+    var tminfoL = Calendar.info(now,Time.FORMAT_LONG);
+    return(Lang.format("$1$ $2$-$3$-$4$ $5$:$6$:$7$",
+        [tminfoL.day_of_week,tminfo.month,tminfo.day,tminfo.year,
+        //1,2,3]));
+        tminfo.hour,tminfo.min.format("%02d"),tminfo.sec.format("%02d")]));
+}
+
 //-----------------------------------------------------
 // ms to [[hh:]m]m:ss
 function strDur(time)

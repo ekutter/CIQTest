@@ -86,7 +86,7 @@ class PgHomeView extends Ui.View
 
         var y = 4;
         fillRect(dc,0,0,cxScreen,FntAscent[F4],ClrYellow);
-        y += drawTextY(dc,xCenter,y,F4,"Home2",JC,ClrFG);
+        y += drawTextY(dc,xCenter,y,F4,"Home",JC,ClrFG);
 
         y += drawTextY(dc,xCenter,y,F2,strBench,JC,ClrFG);
 
@@ -114,7 +114,7 @@ class PgHomeView extends Ui.View
         
         var ver = settings.monkeyVersion;
         s = Lang.format("fw$1$.$2$ CIQ$3$.$4$.$5$", 
-            [settings.firmwareVersion[0],settings.firmwareVersion[1],
+            [settings.firmwareVersion[0],settings.firmwareVersion[1].format("%2.2d"),
              ver[0],ver[1],ver[2]]); 
         y += drawTextY(dc,xCenter,y,F2,s,JC,ClrFG);        
 
