@@ -135,9 +135,9 @@ class DevTestFldView extends Ui.DataField
         dc.drawText(cx/2,y,F2,strMem, JC);
         y += dc.getFontHeight(F2);  
         
-        str = Lang.format("e=$1$,a=$2$",[strAlt(alt),strAlt(asc)]);
-        //var lvl = Sys.getSystemStats().battery;
-        //str = Lang.format("$1$% $2$.$3$.$4$",[lvl.format("%.2f"),verCIQ[0],verCIQ[1],verCIQ[2]]);  
+        //str = Lang.format("e=$1$,a=$2$",[strAlt(alt),strAlt(asc)]);
+        var lvl = Sys.getSystemStats().battery;
+        str = Lang.format("$1$% $2$.$3$.$4$",[lvl.format("%.2f"),verCIQ[0],verCIQ[1],verCIQ[2]]);  
         dc.drawText(cx/2,y,F2,str, JC);
 
         y += dc.getFontHeight(F2);  
