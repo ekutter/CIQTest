@@ -1,7 +1,5 @@
-using Toybox.Application as App;
 using Toybox.System as Sys;
 using Toybox.WatchUi as Ui;
-using Toybox.AntPlus as AntP;
 using Toybox.Graphics as Gfx;
 
 //---------------------------------------------------------
@@ -20,29 +18,41 @@ class TestSensorReconnectDelegate extends Ui.BehaviorDelegate
     //-------------------------------------------
     function onSelect()
     {
-        view.toggleSensor();
+        view.toggleSensor();  //switch between the two sensor ID's
+    }
+    
+    //-------------------------------------------
+    function onNextPage()
+    {
+        view.nextSNSType(1);
+    }
+    
+    //-------------------------------------------
+    function onPreviousPage()
+    {
+        view.nextSNSType(-1);
     }
 }
 //---------------------------------------------------------
 //---------------------------------------------------------
 class TestSensorReconnectView extends Ui.View 
 {
-    var s1;
-    var s2;
+    var s1;     //sensor 1 - during search, and the sensor that gets toggled
+    var s2;     //sensor 2 - only used during setup, then will be null
     
     var id1 = 0;
     var id2 = 0;
-    
-    var idCur;
+    var idCur;  //current ID during toggling - should equal s1.idSensor
    
-    var fSensorsFound = false;
+    var fSensorsFound = false;  //have we found 2 sensors yet?
+    
+    var snsType=SNS_HR; //sensor type - this gets incremented in nextSNS so will be 0=HR
 
     //-------------------------------------------
     function initialize() 
     {
         View.initialize();
-        s1 = new TestSensor(0);
-        s2 = new TestSensor(0);
+        nextSNSType(0); //start off with two HR sensors
     }
 
     //-------------------------------------------
@@ -55,15 +65,29 @@ class TestSensorReconnectView extends Ui.View
             Ui.requestUpdate();
         }
     }
-
+    //-------------------------------------------
+    // new sensor type, so reset everything.
+    // re-search for 2 sensors of this type
+    function nextSNSType(inc)
+    {
+        fSensorsFound = false;
+        id1=0;
+        id2=0;
+        snsType = (snsType+inc+SNS_COUNT) % SNS_COUNT;
+        if (s1 != null) {s1.closeSensor();}
+        if (s2 != null) {s2.closeSensor();}      
+        s1 = new TestSensor(0,snsType);
+        s2 = new TestSensor(0,snsType);
+        Ui.requestUpdate();
+    }       
     //-------------------------------------------
     function onUpdate(dc) 
     {
-        dc.setColor(ClrBlack,ClrWhite);
+        dc.setColor(Gfx.COLOR_BLACK, Gfx.COLOR_WHITE);
         dc.clear();
        
-        dc.setColor(ClrBlack,ClrTrans);
-
+        //dc.setColor(Gfx.COLOR_BLACK, Gfx.COLOR_TRANSPARENT);
+        // if we haven't found two sensors yet, see if we have found them now
         if (!fSensorsFound)
         {
             if (s1.idSensorCur != null) {id1 = s1.idSensorCur;}
@@ -72,35 +96,44 @@ class TestSensorReconnectView extends Ui.View
             
             if (fSensorsFound)
             {
+                //we found the two sensor ID's, so close s2, and now just use s1 to toggle
                 s2.closeSensor();
                 s2 = null;
-                s1.resetSensor(id1);
                 idCur = id1;
+                
+                s1.resetSensor(idCur);
             }
         }
 
-        var fnt = F2;
-        var x = 150;
+        var fnt = Gfx.FONT_SMALL;
+        var xMid = dc.getWidth()/2;
+        var x = dc.getWidth() * 0.6;
         
         var str1 = fSensorsFound ? "Press Start to" : "finding sensors";
-        var str2 = fSensorsFound ? "toggle sensors" : "";
-        dc.drawText(130,30,F2, str1, Gfx.TEXT_JUSTIFY_CENTER);
-        dc.drawText(130,55,F2, str2, Gfx.TEXT_JUSTIFY_CENTER);
+        var str2 = fSensorsFound ? "switch sensors" : "";
+        dc.drawText(xMid,30,fnt, str1, Gfx.TEXT_JUSTIFY_CENTER);
+        dc.drawText(xMid,55,fnt, str2, Gfx.TEXT_JUSTIFY_CENTER);
 
-        dc.drawText(x-4,95,F2, "Sensor 1:", Gfx.TEXT_JUSTIFY_RIGHT);
-        dc.drawText(x+4,95,F2, id1, Gfx.TEXT_JUSTIFY_LEFT);
+        dc.drawText(x-4,95,fnt, "Sensor 1:", Gfx.TEXT_JUSTIFY_RIGHT);
+        dc.drawText(x+4,95,fnt, id1, Gfx.TEXT_JUSTIFY_LEFT);
 
-        dc.drawText(x-4,120,F2, "Sensor 2:", Gfx.TEXT_JUSTIFY_RIGHT);
-        dc.drawText(x+4,120,F2, id2, Gfx.TEXT_JUSTIFY_LEFT);
+        dc.drawText(x-4,120,fnt, "Sensor 2:", Gfx.TEXT_JUSTIFY_RIGHT);
+        dc.drawText(x+4,120,fnt, id2, Gfx.TEXT_JUSTIFY_LEFT);
+
+        dc.drawText(xMid,215,fnt, TestSensor.rgName[snsType], Gfx.TEXT_JUSTIFY_CENTER);
 
         if (fSensorsFound)
         {
-            dc.drawText(x-4,155,F2, "requested:", Gfx.TEXT_JUSTIFY_RIGHT);
-            dc.drawText(x+4,155,F2, s1.idSensorRequested, Gfx.TEXT_JUSTIFY_LEFT);
+            if ((s1.idSensorCur != null) && (s1.idSensorRequested != s1.idSensorCur))
+            {
+                dc.setColor(Gfx.COLOR_RED, Gfx.COLOR_TRANSPARENT);
+            } 
+            //only display the current status once we've found the two sensor id's
+            dc.drawText(x-4,155,fnt, "requested:", Gfx.TEXT_JUSTIFY_RIGHT);
+            dc.drawText(x+4,155,fnt, s1.idSensorRequested, Gfx.TEXT_JUSTIFY_LEFT);
 
-            dc.drawText(x-4,180,F2, "connected:", Gfx.TEXT_JUSTIFY_RIGHT);
-            dc.drawText(x+4,180,F2, s1.idSensorCur, Gfx.TEXT_JUSTIFY_LEFT);
+            dc.drawText(x-4,180,fnt, "connected:", Gfx.TEXT_JUSTIFY_RIGHT);
+            dc.drawText(x+4,180,fnt, s1.idSensorCur, Gfx.TEXT_JUSTIFY_LEFT);
         }
     }
-
 }

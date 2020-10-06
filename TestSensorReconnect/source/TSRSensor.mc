@@ -1,11 +1,9 @@
 using Toybox.System as Sys;
-using Toybox.Application as App;
 using Toybox.Ant as Ant;
-using Toybox.Time as Time;
-using Toybox.Lang as Lang;
-using Toybox.Attention as Att;
-using Toybox.Position as Position;
 
+enum {SNS_HR, SNS_TRACKER, SNS_FP, SNS_POWER, SNS_COUNT}
+//-----------------------------------------------
+//-----------------------------------------------
 class TestSensor
 {
     var idSensorCur = 0; //the one currently found and being viewed
@@ -14,10 +12,23 @@ class TestSensor
     //-------------------------------------------------------------------------
     var antChannel; //Ant.GenericChannel
     var searching = false;
+    
+    //these must match the order
+    var sns;
+    var rgType = [120,41,124,11];
+    //var rgPeriod = [16268,2048,16268,32768];
+    var rgPeriod = [8070,2048,8134,4091];
+    //HR 8070, 16140, or 32768
+    //power 4091, 8182, or 32768
+    //fp 8134 or 32768
+    
+    
+    static var rgName = ["HR","TRACKER", "FootPod", "Power"];
 
     //---------------------------------
-    function initialize(id)
+    function initialize(id, snsIn)
     {
+        sns = snsIn;
         initSensor(id);
     }
     //---------------------------------
@@ -25,7 +36,7 @@ class TestSensor
     {
         try
         {
-            logMsg("initSensor("+idSensorIn+"): ");
+            Sys.println("initSensor("+idSensorIn+","+rgName[sns]+"): ");
             closeSensor(); //release the channel if it's not null
             idSensorRequested = idSensorIn;
             idSensorCur = null;
@@ -37,9 +48,9 @@ class TestSensor
     
             var deviceCfg = new Ant.DeviceConfig( {
                 :deviceNumber => idSensorRequested, //0==Wildcard our search
-                :deviceType => 41, //tracker profile
+                :deviceType => rgType[sns], //tracker profile
                 :transmissionType => 0,
-                :messagePeriod => 2048,
+                :messagePeriod => rgPeriod[sns],
                 :radioFrequency => 57,             //Ant+ Frequency
                 :searchTimeoutLowPriority => 10,    //Timeout in 2.5s
                 :searchTimeoutHighPriority => 0,    // Timeout in 2.5s
@@ -51,7 +62,7 @@ class TestSensor
             
         } catch (ex)
         {
-            logMsg("Tracker: Exception adding Ant+ sensor: " + ex.getErrorMessage());
+            Sys.println("Tracker: Exception adding Ant+ sensor: " + ex.getErrorMessage());
             searching = true;
         }
     }
@@ -61,7 +72,7 @@ class TestSensor
     {
         if (antChannel != null) 
         {
-            logMsg("CloseSensor: ");
+            Sys.println("CloseSensor: ");
             antChannel.release();
             antChannel = null;
         }
@@ -71,7 +82,7 @@ class TestSensor
     // just minimal reset;
     function resetSensor(idSensorIn)
     {
-        logMsg("resetSensor: " + idSensorIn);
+        Sys.println("resetSensor: " + idSensorIn);
         initSensor(idSensorIn);
     }
 
@@ -86,7 +97,7 @@ class TestSensor
             {
                 searching = false;
                 idSensorCur = msg.deviceNumber & 0xffff; //only low 16 bits matter
-                logMsg("Tracker - tracker found: " + idSensorCur);
+                Sys.println("Sensor found id=" + idSensorCur);
 
                 var deviceCfg = antChannel.getDeviceConfig();
                 if (deviceCfg.deviceNumber != idSensorCur)
@@ -102,11 +113,12 @@ class TestSensor
                 if (Ant.MSG_CODE_EVENT_CHANNEL_CLOSED == (payload[1] & 0xFF))
                 {
                     // Channel closed, re-open - we don't care for this test case
-                    logMsg("MSG_CODE_EVENT_CHANNEL_CLOSED ******* "+ idSensorCur);
+                    Sys.println("MSG_CODE_EVENT_CHANNEL_CLOSED ******* "+ idSensorCur);
+                    //initSensor(idSensorRequested);
                 }
                 else if( Ant.MSG_CODE_EVENT_RX_FAIL_GO_TO_SEARCH  == (payload[1] & 0xFF) )
                 {
-                    logMsg("Tracker: event FAIL - back to search");
+                    Sys.println("Tracker: event FAIL - back to search");
                     searching = true;
                 }
             }
