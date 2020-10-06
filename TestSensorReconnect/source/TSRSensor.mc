@@ -21,6 +21,7 @@ class TestSensor
     //HR 8070, 16140, or 32768
     //power 4091, 8182, or 32768
     //fp 8134 or 32768
+    //tracker 2048 or 32768
     
     
     static var rgName = ["HR","TRACKER", "FootPod", "Power"];

@@ -86,7 +86,6 @@ class TestSensorReconnectView extends Ui.View
         dc.setColor(Gfx.COLOR_BLACK, Gfx.COLOR_WHITE);
         dc.clear();
        
-        //dc.setColor(Gfx.COLOR_BLACK, Gfx.COLOR_TRANSPARENT);
         // if we haven't found two sensors yet, see if we have found them now
         if (!fSensorsFound)
         {
