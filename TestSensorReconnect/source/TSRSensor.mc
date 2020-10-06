@@ -15,9 +15,9 @@ class TestSensor
     
     //these must match the order
     var sns;
-    var rgType = [120,41,124,11];
+    static var rgType = [120,41,124,11];
     //var rgPeriod = [16268,2048,16268,32768];
-    var rgPeriod = [8070,2048,8134,4091];
+    static var rgPeriod = [8070,2048,8134,4091];
     //HR 8070, 16140, or 32768
     //power 4091, 8182, or 32768
     //fp 8134 or 32768

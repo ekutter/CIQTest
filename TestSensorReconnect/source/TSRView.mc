@@ -86,6 +86,7 @@ class TestSensorReconnectView extends Ui.View
         dc.setColor(Gfx.COLOR_BLACK, Gfx.COLOR_WHITE);
         dc.clear();
        
+        dc.setColor(Gfx.COLOR_BLACK, Gfx.COLOR_TRANSPARENT);
         // if we haven't found two sensors yet, see if we have found them now
         if (!fSensorsFound)
         {
@@ -110,16 +111,17 @@ class TestSensorReconnectView extends Ui.View
         
         var str1 = fSensorsFound ? "Press Start to" : "finding sensors";
         var str2 = fSensorsFound ? "switch sensors" : "";
-        dc.drawText(xMid,30,fnt, str1, Gfx.TEXT_JUSTIFY_CENTER);
-        dc.drawText(xMid,55,fnt, str2, Gfx.TEXT_JUSTIFY_CENTER);
+        dc.drawText(xMid,15,fnt, str1, Gfx.TEXT_JUSTIFY_CENTER);
+        dc.drawText(xMid,40,fnt, str2, Gfx.TEXT_JUSTIFY_CENTER);
 
-        dc.drawText(x-4,95,fnt, "Sensor 1:", Gfx.TEXT_JUSTIFY_RIGHT);
-        dc.drawText(x+4,95,fnt, id1, Gfx.TEXT_JUSTIFY_LEFT);
+        dc.drawText(x-4,75,fnt, "Sensor 1:", Gfx.TEXT_JUSTIFY_RIGHT);
+        dc.drawText(x+4,75,fnt, id1, Gfx.TEXT_JUSTIFY_LEFT);
 
-        dc.drawText(x-4,120,fnt, "Sensor 2:", Gfx.TEXT_JUSTIFY_RIGHT);
-        dc.drawText(x+4,120,fnt, id2, Gfx.TEXT_JUSTIFY_LEFT);
+        dc.drawText(x-4,100,fnt, "Sensor 2:", Gfx.TEXT_JUSTIFY_RIGHT);
+        dc.drawText(x+4,100,fnt, id2, Gfx.TEXT_JUSTIFY_LEFT);
 
-        dc.drawText(xMid,215,fnt, TestSensor.rgName[snsType], Gfx.TEXT_JUSTIFY_CENTER);
+        dc.drawText(xMid,190,fnt, TestSensor.rgName[snsType], Gfx.TEXT_JUSTIFY_CENTER);
+        dc.drawText(xMid,215,fnt, TestSensor.rgPeriod[snsType], Gfx.TEXT_JUSTIFY_CENTER);
 
         if (fSensorsFound)
         {
@@ -128,11 +130,11 @@ class TestSensorReconnectView extends Ui.View
                 dc.setColor(Gfx.COLOR_RED, Gfx.COLOR_TRANSPARENT);
             } 
             //only display the current status once we've found the two sensor id's
-            dc.drawText(x-4,155,fnt, "requested:", Gfx.TEXT_JUSTIFY_RIGHT);
-            dc.drawText(x+4,155,fnt, s1.idSensorRequested, Gfx.TEXT_JUSTIFY_LEFT);
+            dc.drawText(x-4,135,fnt, "requested:", Gfx.TEXT_JUSTIFY_RIGHT);
+            dc.drawText(x+4,135,fnt, s1.idSensorRequested, Gfx.TEXT_JUSTIFY_LEFT);
 
-            dc.drawText(x-4,180,fnt, "connected:", Gfx.TEXT_JUSTIFY_RIGHT);
-            dc.drawText(x+4,180,fnt, s1.idSensorCur, Gfx.TEXT_JUSTIFY_LEFT);
+            dc.drawText(x-4,160,fnt, "connected:", Gfx.TEXT_JUSTIFY_RIGHT);
+            dc.drawText(x+4,160,fnt, s1.idSensorCur, Gfx.TEXT_JUSTIFY_LEFT);
         }
     }
 }
