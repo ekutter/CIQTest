@@ -6,6 +6,8 @@ using Toybox.System as Sys;
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 var xyTap = null;
+enum {FDbgMode=1}
+var fDbgMode=false; //on partial update data
 
 class DevTestFldApp extends App.AppBase {
 
@@ -40,6 +42,17 @@ class DevTestFldApp extends App.AppBase {
     //-------------------------------------------
     function getInitialView() {
         return [ new DevTestFldView(), new DevTestFldDelegate() ];
+    }
+
+    //-----------------------------------------------------
+    function getSettingsView() 
+    {
+        Sys.println("getSettingsView");
+
+        var menu = new SettingsMenu();
+        menu.addItem(new Ui.ToggleMenuItem("DbgMode", null, FDbgMode, fDbgMode, null));
+
+        return [menu, new SettingsMenuDelegate()];
     }
 
 }

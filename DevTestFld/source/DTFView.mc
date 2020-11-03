@@ -144,13 +144,15 @@ class DevTestFldView extends Ui.DataField
         //str = Lang.format("$1$,$2$,$3$,Sh=$4$",[cLayout, cCompute,cUpdate,cShow]);  
         str = Lang.format("upd=$1$,show=$2$",[cUpdate,cShow]);  
         dc.drawText(cx/2,y,F2,str, JC);
+
+        y += dc.getFontHeight(F2);  
+        dc.drawText(cx/2,y,F2,"Dbg="+fDbgMode, JC);
            
         if (xyTap != null)
         {
             y += dc.getFontHeight(F2);  
             dc.drawText(cx/2,y,F2,xyTap, JC);
         }
-
     }
 
 }
