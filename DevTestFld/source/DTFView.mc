@@ -4,6 +4,7 @@ using Toybox.Lang as Lang;
 using Toybox.System as Sys;
 using Toybox.FitContributor as Fit;
 using Toybox.Attention as Att;
+using Toybox.Activity as Act;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -153,6 +154,22 @@ class DevTestFldView extends Ui.DataField
             y += dc.getFontHeight(F2);  
             dc.drawText(cx/2,y,F2,xyTap, JC);
         }
+
+        var info = Act.getActivityInfo();
+        var strCrs = "toDest: N/A";
+        if ((info has :distanceToDestination) && (info.distanceToDestination != null))
+        {
+          strCrs = Lang.format("toDest: $1$ / $2$", 
+            [strDist(info.distanceToNextPoint),strDist(info.distanceToDestination)]);  
+        }
+        y += dc.getFontHeight(F2);
+        dc.drawText(cx/2,y,F2,strCrs, JC);
+        
+//            if ((alt != null) && (info has :elevationAtDestination) && (info.elevationAtDestination != null))
+//            {
+//                altDiffDest = info.elevationAtDestination - alt;            
+//            }
+        
     }
 
 }
