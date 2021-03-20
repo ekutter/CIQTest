@@ -8,6 +8,7 @@ using Toybox.System as Sys;
 var xyTap = null;
 enum {FDbgMode=1}
 var fDbgMode=false; //on partial update data
+var fInstinct2;
 
 class DevTestFldApp extends App.AppBase {
 
@@ -23,12 +24,13 @@ class DevTestFldApp extends App.AppBase {
         Sys.println("FW Version="+set.firmwareVersion);
         Sys.println("24hr="+set.is24Hour);
         Sys.println("monkey ver="+set.monkeyVersion);
-        Sys.println("part #="+set.partNumber);
+        Sys.println("part #='"+set.partNumber+"'");
         Sys.println(Lang.format("mem used=$1$k, df max mem=$2$k",
             [stats.usedMemory/1024, 
              stats.totalMemory/1024]));
         Sys.println("--------");
-             
+        fInstinct2 = set.partNumber.equals("006-B3889-00");
+        Sys.println("fInstinct2: " + fInstinct2);
     }
 
     //-------------------------------------------

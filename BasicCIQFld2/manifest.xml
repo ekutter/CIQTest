@@ -4,6 +4,8 @@
             <iq:product id="approachs62"/>
             <iq:product id="edge130"/>
             <iq:product id="edge530"/>
+            <iq:product id="fenix7x"/>
+            <iq:product id="fr745"/>
         </iq:products>
         <iq:permissions/>
         <iq:languages/>

@@ -133,43 +133,63 @@ class DevTestFldView extends Ui.DataField
 
         var stats = Sys.getSystemStats();
         var strMem = Lang.format("mem: $1$k/$2$k",[stats.usedMemory/1024,stats.totalMemory/1024]);
-        dc.drawText(cx/2,y,F2,strMem, JC);
-        y += dc.getFontHeight(F2);  
+        dc.drawText(cx/2,y,F1,strMem, JC);
+        y += dc.getFontHeight(F1);  
         
         //str = Lang.format("e=$1$,a=$2$",[strAlt(alt),strAlt(asc)]);
         var lvl = Sys.getSystemStats().battery;
         str = Lang.format("$1$% $2$.$3$.$4$",[lvl.format("%.2f"),verCIQ[0],verCIQ[1],verCIQ[2]]);  
-        dc.drawText(cx/2,y,F2,str, JC);
+        dc.drawText(cx/2,y,F1,str, JC);
 
-        y += dc.getFontHeight(F2);  
+        y += dc.getFontHeight(F1);  
         //str = Lang.format("$1$,$2$,$3$,Sh=$4$",[cLayout, cCompute,cUpdate,cShow]);  
         str = Lang.format("upd=$1$,show=$2$",[cUpdate,cShow]);  
-        dc.drawText(cx/2,y,F2,str, JC);
+        dc.drawText(cx/2,y,F1,str, JC);
 
-        y += dc.getFontHeight(F2);  
-        dc.drawText(cx/2,y,F2,"Dbg="+fDbgMode, JC);
-           
         if (xyTap != null)
         {
-            y += dc.getFontHeight(F2);  
-            dc.drawText(cx/2,y,F2,xyTap, JC);
+            y += dc.getFontHeight(F1);  
+            dc.drawText(cx/2,y,F1,xyTap, JC);
         }
 
-        var info = Act.getActivityInfo();
-        var strCrs = "toDest: N/A";
-        if ((info has :distanceToDestination) && (info.distanceToDestination != null))
+        if (!fInstinct2) 
         {
-          strCrs = Lang.format("toDest: $1$ / $2$", 
-            [strDist(info.distanceToNextPoint),strDist(info.distanceToDestination)]);  
+            var info = Act.getActivityInfo();  //might not be there on the Instinct 2 - crashing on the Instinct 2
+            if ((info has :distanceToDestination) && (info.distanceToDestination != null))
+            {
+                var strEleAtDest = "-";
+                var strEleAtNext = "-";
+                var strOffCourseDist = "-"; 
+    
+                if (info has :elevationAtDestination){strEleAtDest = formatFloatOrNull(info.elevationAtDestination);}
+                if (info has :elevationAtNextPoint){strEleAtNext = formatFloatOrNull(info.elevationAtNextPoint);}
+                if (info has :offCourseDistance){strOffCourseDist = formatFloatOrNull(info.offCourseDistance);}
+    
+                var strCrs = Lang.format("$1$,$2$,$3$,$4$,$5$", [
+                    strEleAtDest,strEleAtNext,strOffCourseDist,
+                    (info has :nameOfDestination) ? info.nameOfDestination : "-",
+                    (info has :nameOfNextPoint) ? info.nameOfNextPoint : "-"]);
+    
+                y += dc.getFontHeight(F1);
+                dc.drawText(cx/2,y,F1,strCrs, JC);
+    
+                strCrs = Lang.format("toDest: $1$ / $2$", 
+                  [strDist(info.distanceToNextPoint),strDist(info.distanceToDestination)]);  
+                y += dc.getFontHeight(F1);
+                dc.drawText(cx/2,y,F1,strCrs, JC);
+            }
+            else 
+            {
+                y += dc.getFontHeight(F1);
+                dc.drawText(cx/2,y,F1,"no course info", JC);
+            }
         }
-        y += dc.getFontHeight(F2);
-        dc.drawText(cx/2,y,F2,strCrs, JC);
         
-//            if ((alt != null) && (info has :elevationAtDestination) && (info.elevationAtDestination != null))
-//            {
-//                altDiffDest = info.elevationAtDestination - alt;            
-//            }
-        
+        y += dc.getFontHeight(F1);  
+        dc.drawText(cx/2,y,F1,"Dbg="+fDbgMode, JC);
     }
-
+    function formatFloatOrNull(v)
+    {
+        return((v == null) ? "null" : v.format("%.1f"));
+    }
 }
