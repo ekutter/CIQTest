@@ -38,6 +38,11 @@ class DevTestFldView extends Ui.DataField
     }
     
     //-------------------------------------------
+    function logMsg(str)
+    {
+        Sys.println(Lang.format("$1$: $2$",[strTimeOfDay(),str]));
+    }    
+    //-------------------------------------------
     function strObscure()
     {
         var str = "";
@@ -59,13 +64,14 @@ class DevTestFldView extends Ui.DataField
 //        if (Att has :vibrate)
 //            {Att.vibrate([new Att.VibeProfile(  100,400 )]);}
     
-        Sys.println(strTimeOfDay() + " - " + strDur(dur) +  "- onShow()");
+        logMsg("onShow: " + strDur(dur) + " " + cShow);
         cShow++;
     }
 
     //-------------------------------------------
     function compute(info) 
     {
+        logMsg("compute");
         //fldAlt.onUpdate();
         
         cCompute++;
@@ -102,6 +108,7 @@ class DevTestFldView extends Ui.DataField
     //-------------------------------------------
     function onUpdate(dc) 
     {
+        logMsg("onUpdate cUpdate=" + cUpdate);
         var cx = dc.getWidth();
         var cy = dc.getHeight();
         cUpdate++;

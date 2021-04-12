@@ -83,12 +83,20 @@ class MapSampleTrackView extends Ui.MapTrackView {
         // Call the parent onUpdate function to redraw the layout
         MapView.onUpdate(dc);
         dc.setColor(Gfx.COLOR_BLACK, Gfx.COLOR_TRANSPARENT);
-        /*dc.drawText(
+        dc.drawText(
                     dc.getWidth() / 2,                      // gets the width of the device and divides by 2
                     dc.getHeight() * 3 / 4,                     // gets the height of the device and divides by 2
                     Gfx.FONT_LARGE,                    // sets the font size
                     "Hello World",                          // the String to display
                     Gfx.TEXT_JUSTIFY_CENTER            // sets the justification for the text
-                  );*/
+                  );
+                          
+        var scale = dc.getWidth() / 240.0;                          
+        dc.setColor(Gfx.COLOR_RED, Gfx.COLOR_RED);
+        dc.fillRectangle(30*scale,30*scale,60*scale,60*scale);                  
+
+        dc.setPenWidth(8*scale);
+        dc.setColor(Gfx.COLOR_GREEN, Gfx.COLOR_GREEN);
+        dc.drawRectangle(30*scale,120*scale,60*scale,60*scale);                  
     }
 }

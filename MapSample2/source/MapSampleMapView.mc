@@ -7,7 +7,7 @@ class MapSampleMapView extends Ui.MapView {
 
     function initialize() {
         MapView.initialize();
-        Sys.println("a");
+        //Sys.println("a");
         // set the current mode for the Map to be preview
         setMapMode(Ui.MAP_MODE_PREVIEW);
 
@@ -15,19 +15,17 @@ class MapSampleMapView extends Ui.MapView {
 
         // set the bound box for the screen area to focus the map on
         // create the bounding box for the map area
-        Sys.println("b");
+        //Sys.println("b");
         var top_left = new Position.Location({:latitude => 38.85695, :longitude =>-94.80051, :format => :degrees});
         var bottom_right = new Position.Location({:latitude => 38.85391, :longitude =>-94.7963, :format => :degrees});
         MapView.setMapVisibleArea(top_left, bottom_right);
-        Sys.println("c");
+        //Sys.println("c");
         MapView.setScreenVisibleArea(0, 0, System.getDeviceSettings().screenWidth, System.getDeviceSettings().screenHeight / 2);
-        Sys.println("d");
+        //Sys.println("d");
     }
     
     function updateMarkers()
     {
-        return;
-        
         Sys.println("update markers");
         // create a new polyline
         var polyline = new Ui.MapPolyline();
@@ -91,9 +89,9 @@ class MapSampleMapView extends Ui.MapView {
     // Update the view
     function onUpdate(dc) {
         // Call the parent onUpdate function to redraw the layout
-        Sys.println("mapView: onUpdate");
+        //Sys.println("mapView: onUpdate");
         MapView.onUpdate(dc);
-        return;
+        //return;
         dc.setColor(Gfx.COLOR_BLUE, Gfx.COLOR_TRANSPARENT);
         dc.drawText(
                     dc.getWidth() / 2,                      // gets the width of the device and divides by 2
