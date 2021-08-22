@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "..\\.."
+		},
+		{
+			"path": "..\\..\\..\\TestObscurity"
+		},
+		{
+			"path": "..\\..\\..\\..\\CIQ\\DevTestApp"
+		}
+	],
+	"settings": {}
+}

@@ -134,8 +134,8 @@ class DevTestFldView extends Ui.DataField
         dc.drawText(cx/2,y,F2,str, JC);
         y += dc.getFontHeight(F2);  
 
-        str = Lang.format("[$1$,$2$] $3$ ",[cx,cy,strObscure()]);  
-        dc.drawText(cx/2,y,F2,str, JC);
+        str = Lang.format("$3$[$1$,$2$] ",[cx,cy,strObscure()]);  
+        dc.drawText(cx/2,y,F0,str, JC);
         y += dc.getFontHeight(F2);  
 
         var stats = Sys.getSystemStats();
