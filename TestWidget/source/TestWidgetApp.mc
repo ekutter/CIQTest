@@ -5,7 +5,7 @@ class TestWidgetApp extends Application.AppBase {
 
     function initialize() {
         Sys.println("TestWidgetApp");
-        Sys.println(strTimeOfDay(true));
+        //Sys.println(strTimeOfDay(true));
         AppBase.initialize();
     }
     

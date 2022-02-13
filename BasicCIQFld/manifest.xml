@@ -8,6 +8,7 @@
             <iq:product id="fenix7x"/>
             <iq:product id="fr745"/>
             <iq:product id="fr945"/>
+            <iq:product id="fr945lte"/>
         </iq:products>
         <iq:permissions>
             <iq:uses-permission id="SensorHistory"/>

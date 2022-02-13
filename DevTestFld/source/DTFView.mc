@@ -71,7 +71,7 @@ class DevTestFldView extends Ui.DataField
     //-------------------------------------------
     function compute(info) 
     {
-        logMsg("compute");
+        //logMsg("compute");
         //fldAlt.onUpdate();
         
         cCompute++;
@@ -108,7 +108,7 @@ class DevTestFldView extends Ui.DataField
     //-------------------------------------------
     function onUpdate(dc) 
     {
-        logMsg("onUpdate cUpdate=" + cUpdate);
+        //logMsg("onUpdate cUpdate=" + cUpdate);
         var cx = dc.getWidth();
         var cy = dc.getHeight();
         cUpdate++;
@@ -194,6 +194,7 @@ class DevTestFldView extends Ui.DataField
         
         y += dc.getFontHeight(F1);  
         dc.drawText(cx/2,y,F1,"Dbg="+fDbgMode, JC);
+
     }
     function formatFloatOrNull(v)
     {

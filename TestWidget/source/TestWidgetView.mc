@@ -9,14 +9,20 @@ class MyGlanceView extends WatchUi.GlanceView
 {
     function initialize() {
         Sys.println("GlanceViewInit");
-        Sys.println(strTimeOfDay(true));
+        //Sys.println(strTimeOfDay(true));
         GlanceView.initialize();
     }
     
     function onUpdate(dc) {
+        var xCenter = dc.getWidth() / 2;
+        var yCenter = dc.getHeight() / 2;
+
         Sys.println("glance view: onUpdate");
         dc.setColor(Gfx.COLOR_RED, Gfx.COLOR_RED);
         dc.clear();
+
+        dc.setColor(Gfx.COLOR_BLACK, Gfx.COLOR_TRANSPARENT);
+        dc.drawText(xCenter,yCenter,Gfx.FONT_LARGE, strTimeOfDay(true), Gfx.TEXT_JUSTIFY_CENTER | Gfx.TEXT_JUSTIFY_VCENTER);
     }
 }
 
@@ -29,8 +35,14 @@ class MyWidgetView extends WatchUi.View
     }
 
     function onUpdate(dc) {
+        var xCenter = dc.getWidth() / 2;
+        var yCenter = dc.getHeight() / 2;
         dc.setColor(Gfx.COLOR_GREEN, Gfx.COLOR_GREEN);
         dc.clear();
+
+        dc.setColor(Gfx.COLOR_BLACK, Gfx.COLOR_TRANSPARENT);
+        dc.drawText(xCenter,yCenter,Gfx.FONT_LARGE, strTimeOfDay(true), Gfx.TEXT_JUSTIFY_CENTER | Gfx.TEXT_JUSTIFY_VCENTER);
+
         
     }
 }
@@ -43,9 +55,9 @@ class MyServiceDelegate extends Sys.ServiceDelegate
     }
 }
 
-//(:glance)
+(:glance)
 function strTimeOfDay(fLong){return(strTime(Sys.getClockTime(),fLong));}
-//(:glance)
+(:glance)
 function strTime(clockTime,fLong)
 {    
     var hour, min, result;
