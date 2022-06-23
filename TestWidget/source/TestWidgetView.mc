@@ -18,10 +18,9 @@ class MyGlanceView extends WatchUi.GlanceView
         var yCenter = dc.getHeight() / 2;
 
         Sys.println("glance view: onUpdate");
-        dc.setColor(Gfx.COLOR_RED, Gfx.COLOR_RED);
+        dc.setColor(Gfx.COLOR_WHITE, Gfx.COLOR_BLACK);
         dc.clear();
 
-        dc.setColor(Gfx.COLOR_BLACK, Gfx.COLOR_TRANSPARENT);
         dc.drawText(xCenter,yCenter,Gfx.FONT_LARGE, strTimeOfDay(true), Gfx.TEXT_JUSTIFY_CENTER | Gfx.TEXT_JUSTIFY_VCENTER);
     }
 }
