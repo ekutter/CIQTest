@@ -25,6 +25,39 @@ class MyGlanceView extends WatchUi.GlanceView
     }
 }
 
+//---------------------------------------------------------
+//---------------------------------------------------------
+class MyWidgetDelegate extends WatchUi.BehaviorDelegate 
+{
+    //---------------------------------
+    function initialize()
+    {
+        BehaviorDelegate.initialize();
+    }
+    //---------------------------------
+    function onBack()
+    {
+        Sys.exit();
+        return(true);
+    }
+
+    //---------------------------------
+    function onSwipe(swipeEvent)
+    {
+        var dir = swipeEvent.getDirection();
+        switch (dir)
+        {
+        case WatchUi.SWIPE_RIGHT:
+            Sys.exit();
+            return(true);
+        default:
+            break;
+        }
+        return(false);
+    }
+}
+//---------------------------------------------------------
+//---------------------------------------------------------
 class MyWidgetView extends WatchUi.View
 {
     function initialize() {

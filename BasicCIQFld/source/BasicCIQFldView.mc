@@ -2,38 +2,39 @@ using Toybox.WatchUi;
 using Toybox.SensorHistory as Hist;
 using Toybox.System as Sys;
 
+const MetersPerMile = 1609.344;
+const YdPerMile = 1760.0;
+const FtPerMeter = 3.28084;
+const YdPerMeter = 1.09361;
+const MeterSec2MiHr = MetersPerMile/3600.0;
+const MeterSec2MiMin = MetersPerMile/60.0;
+function MinPerMi(spd) {return(MeterSec2MiMin/spd);}
 
-class BasicCIQFldView extends WatchUi.SimpleDataField {
-
-    // Set the label of the data field here.
-    function initialize() {
+class BasicCIQFldView extends WatchUi.SimpleDataField 
+{
+    function initialize() 
+    {
         SimpleDataField.initialize();
-        label = "My Label";
+        label = "Instant Pace";
     }
 
-    // The given info object contains all the current workout
-    // information. Calculate a value and return it in this method.
-    // Note that compute() and onUpdate() are asynchronous, and there is no
-    // guarantee that compute() will be called before onUpdate().
-    var cCompute = 0;
-    function compute(info) {
+    function compute(info) 
+    {
         // See Activity.Info in the documentation for available information.
-        cCompute++;
-        Sys.println("compute");
-        if ((Toybox has :SensorHistory) && (Hist has :getTemperatureHistory))
-        {        
-          Sys.println("hasSensorHistory");
-          var tempIter = Hist.getTemperatureHistory({:period => 1});
-          Sys.println(tempIter.next());
-          var tempNext = tempIter.next();
-          if (tempNext != null)
-          {
-              var tempInternal = tempNext.data;
-              Sys.println("temp:" + tempInternal);
-          }
+        Sys.println(info.currentSpeed);
+
+        if ((info == null) || 
+            (info.currentSpeed==null) ||
+            (info.currentSpeed==0)) 
+        {
+            return("--");
         }
-        
-        return("0:02");
+        var pace = MinPerMi(info.currentSpeed);
+        if (pace > 99.9) {return("99.9");}
+        var a = pace.toNumber();
+        var b = pace - a;
+        var str = a + ":" + (b * 60).format("%02u");
+        return(str);
     }
 
 }
