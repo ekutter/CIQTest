@@ -188,3 +188,30 @@ class TestRecordView extends WatchUi.View {
     
 
 }
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+(:glance)
+class TestRecordGlanceView extends WatchUi.GlanceView 
+{
+    //-------------------------------------------
+    function initialize() 
+    {
+        GlanceView.initialize();
+        Sys.println("Glance: glanceViewInit");
+    }
+
+    //-------------------------------------------
+    function onShow(){}
+    function onHide(){}
+
+    //-------------------------------------------
+    function onUpdate(dc) 
+    {
+        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_WHITE);
+        dc.clear();
+        dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_WHITE);
+        dc.drawText(dc.getWidth()/2, 0, Graphics.FONT_XTINY, "Test Record", Graphics.TEXT_JUSTIFY_CENTER);
+    }
+}
+
