@@ -4,15 +4,21 @@
     <iq:application entry="DevTestFldApp" id="01fd11f2364149dba86356883e98a595" launcherIcon="@Drawables.LauncherIcon" minSdkVersion="3.0.0" name="@Strings.AppName" type="datafield" version="0.0.1">
         <iq:products>
             <iq:product id="approachs62"/>
+            <iq:product id="approachs70"/>
+            <iq:product id="approachs70s"/>
+            <iq:product id="edge1030"/>
+            <iq:product id="edge1030plus"/>
+            <iq:product id="edge1040"/>
             <iq:product id="edge130"/>
             <iq:product id="edge130plus"/>
             <iq:product id="edge530"/>
             <iq:product id="edge830"/>
-            <iq:product id="edge1030"/>
-            <iq:product id="edge1030plus"/>
-            <iq:product id="edge1040"/>
             <iq:product id="enduro"/>
+            <iq:product id="enduro2"/>
             <iq:product id="epix2"/>
+            <iq:product id="epix2pro42mm"/>
+            <iq:product id="epix2pro47mm"/>
+            <iq:product id="epix2pro51mm"/>
             <iq:product id="fenix5plus"/>
             <iq:product id="fenix6"/>
             <iq:product id="fenix6pro"/>
@@ -20,8 +26,11 @@
             <iq:product id="fenix6spro"/>
             <iq:product id="fenix6xpro"/>
             <iq:product id="fenix7"/>
+            <iq:product id="fenix7pro"/>
             <iq:product id="fenix7s"/>
+            <iq:product id="fenix7spro"/>
             <iq:product id="fenix7x"/>
+            <iq:product id="fenix7xpro"/>
             <iq:product id="fr245"/>
             <iq:product id="fr245m"/>
             <iq:product id="fr745"/>
@@ -33,6 +42,8 @@
             <iq:product id="instinct2s"/>
             <iq:product id="marqathlete"/>
             <iq:product id="marqgolfer"/>
+            <iq:product id="venu3"/>
+            <iq:product id="venu3s"/>
             <iq:product id="vivoactive3"/>
             <iq:product id="vivoactive4"/>
         </iq:products>

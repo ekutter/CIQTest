@@ -33,7 +33,7 @@ class BasicCIQFldView extends WatchUi.SimpleDataField {
           }
         }
         
-        return("DF 1");
+        return("0:00");
     }
 
 }

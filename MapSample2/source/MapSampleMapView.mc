@@ -11,7 +11,7 @@ class MapSampleMapView extends Ui.MapView {
         // set the current mode for the Map to be preview
         setMapMode(Ui.MAP_MODE_PREVIEW);
 
-        //updateMarkers();
+        updateMarkers();
 
         // set the bound box for the screen area to focus the map on
         // create the bounding box for the map area
@@ -20,7 +20,8 @@ class MapSampleMapView extends Ui.MapView {
         var bottom_right = new Position.Location({:latitude => 38.85391, :longitude =>-94.7963, :format => :degrees});
         MapView.setMapVisibleArea(top_left, bottom_right);
         //Sys.println("c");
-        MapView.setScreenVisibleArea(0, 0, System.getDeviceSettings().screenWidth, System.getDeviceSettings().screenHeight / 2);
+        MapView.setScreenVisibleArea(0, 0, 
+            System.getDeviceSettings().screenWidth, System.getDeviceSettings().screenHeight / 2);
         //Sys.println("d");
     }
     
@@ -30,10 +31,7 @@ class MapSampleMapView extends Ui.MapView {
         // create a new polyline
         var polyline = new Ui.MapPolyline();
 
-        // set the color of the line
         polyline.setColor(Gfx.COLOR_RED);
-
-        // set width of the line
         polyline.setWidth(2);
 
         // add locations to the polyline
