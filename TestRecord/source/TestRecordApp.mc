@@ -55,5 +55,12 @@ class TestRecordApp extends Application.AppBase
         view = new TestRecordView();
         return [ view, new BaseInputDelegate() ];
     }
+    //-------------------------------------------
+    (:glance)function getGlanceView() 
+    {
+        Sys.println("getGlanceView");
+        return [ new TestRecordGlanceView() ];
+    }
+
 
 }

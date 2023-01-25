@@ -18,7 +18,7 @@ class TestWidgetApp extends Application.AppBase {
     }
     
     function getInitialView() {
-        return [ new MyWidgetView() ];
+        return [ new MyWidgetView(), new MyWidgetDelegate() ];
     }
 
 }
