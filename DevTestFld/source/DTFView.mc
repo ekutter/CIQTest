@@ -121,6 +121,10 @@ class DevTestFldView extends Ui.DataField
         dc.setColor(ClrGreen,ClrTrans);
         dc.setPenWidth(4);
         dc.drawRectangle(0,0,cx,cy);
+
+        dc.setPenWidth(2);
+        dc.setColor(ClrBlue,ClrTrans);
+        dc.drawRectangle(7,7,cx-14,cy-14);
         dc.setPenWidth(1);
         
         dc.setColor(ClrBlack,ClrTrans);
